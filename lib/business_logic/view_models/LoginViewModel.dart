@@ -23,8 +23,11 @@ class LoginViewModel extends HookWidget {
       password.value = passController.text;
     }, []);
     ApiResponse<RestourantResponse> apiResponse;
-    if (login.value != null && password.value != null) {
-        apiResponse = useLogin(login.value, password.value);
+    if (login.value != null &&
+        password.value != null &&
+        login.value.isNotEmpty &&
+        password.value.isNotEmpty) {
+      apiResponse = useLogin(login.value, password.value);
     } else {
       apiResponse = ApiResponse.initial();
     }
