@@ -1,9 +1,22 @@
-import 'package:ari_pad/utils/theme_color.dart';
+import 'package:ari_pad/business_logic/models/RestourantResponse.dart';
+import 'package:ari_pad/business_logic/routes/route_navigation.dart';
+import 'package:ari_pad/services/api_helper/api_response.dart';
+import 'package:ari_pad/ui/common_widgets/error_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ari_pad/utils/size_config.dart';
 
 class LoginView extends StatelessWidget {
+  ApiResponse apiResponse;
+  Function loginCallback;
+  TextEditingController loginController, passController;
+
+  LoginView(
+      {this.apiResponse,
+      this.loginCallback,
+      this.passController,
+      this.loginController});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -28,6 +41,7 @@ class LoginView extends StatelessWidget {
                 Container(
                   color: Colors.white,
                   child: TextField(
+                    controller: loginController,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.only(left: 2.toWidth),
                         hintText: 'Login',
@@ -50,21 +64,24 @@ class LoginView extends StatelessWidget {
                   height: 24.toHeight,
                 ),
                 InkWell(
-                  child: Container(
-                    // height: 50.toHeight,
-                    color: Colors.black,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      enabled: false,
-                      decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(left: 2.toWidth),
-                          hintText: 'LOGIN',
-                          hintStyle: TextStyle(color: Colors.white),
-                          border: InputBorder.none),
-                    ),
-                  ),
-                  onTap: (){
-
+                  child: CustomErrorHandler(
+                      statuses: [apiResponse.status],
+                      child: Container(
+                        // height: 50.toHeight,
+                        color: Colors.black,
+                        child: TextField(
+                          controller: passController,
+                          textAlign: TextAlign.center,
+                          enabled: false,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 2.toWidth),
+                              hintText: 'LOGIN',
+                              hintStyle: TextStyle(color: Colors.white),
+                              border: InputBorder.none),
+                        ),
+                      )),
+                  onTap: () {
+                    loginCallback();
                   },
                 )
               ],

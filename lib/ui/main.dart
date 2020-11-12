@@ -35,9 +35,12 @@ class InitPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     // TODO: implement build
-    return NestedNavigator(
-        navigationKey: navigationKey,
-        initialRoute: '/login',
-        routes: routeNames);
+    return Scaffold(
+      backgroundColor: ThemeColor().greyColor,
+      body: NestedNavigator(
+          navigationKey: navigationKey,
+          initialRoute: '/login',
+          routes: routeNames),
+    );
   }
 }
