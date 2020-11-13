@@ -1,5 +1,5 @@
-import 'package:ari_pad/ui/common_widgets/left_drag_item.dart';
-import 'package:ari_pad/ui/common_widgets/right_drag_item.dart';
+import 'package:ari_pad/ui/views/orderlist/widgets/left_drag_item.dart';
+import 'package:ari_pad/ui/views/orderlist/widgets/right_drag_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -159,6 +159,7 @@ class _HomePage extends State<HomePage> {
               ),
             )
           ],
-        ));
+        )
+    );
   }
 }

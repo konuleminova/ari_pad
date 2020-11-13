@@ -3,4 +3,6 @@ class ApiConfig {
 
   String LOGIN(String login, String password) =>
       '${BASE_URl}+login&login=${login}&pass=${password}';
+
+  String ORDER_LIST(String token) => '${BASE_URl}orderlist&token=${token}';
 }

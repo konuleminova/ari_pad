@@ -7,6 +7,7 @@ import 'package:ari_pad/services/hooks/use_callback.dart';
 import 'package:ari_pad/services/services/login_service.dart';
 import 'package:ari_pad/ui/common_widgets/error_handler.dart';
 import 'package:ari_pad/ui/views/login/login.dart';
+import 'package:ari_pad/utils/sharedpref/prefence_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -34,6 +35,7 @@ class LoginViewModel extends HookWidget {
 
     useSideEffect(() {
       if (apiResponse?.data?.token != null) {
+        PreferenceUtils.setString('token', apiResponse.data.token);
         pushRouteWithName('/');
       }
       if (apiResponse.status == Status.Error) {
