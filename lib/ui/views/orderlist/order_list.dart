@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:ari_pad/utils/size_config.dart';
 
 class OrderListView extends StatelessWidget {
-  OrderListResponse orderListResponse;
+  final OrderListResponse orderListResponse;
+  Function(int index) changeStatus;
 
-  OrderListView({this.orderListResponse});
+  OrderListView({this.orderListResponse, this.acceptTarget, this.changeStatus});
 
-  bool accepted1 = false;
-  bool accepted2 = false;
+  final Map<String, bool> acceptTarget;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,8 @@ class OrderListView extends StatelessWidget {
                               color: Colors.black,
                               padding: EdgeInsets.all(16),
                             ),
-                            child: !accepted1
+                            child: !acceptTarget[
+                                    orderListResponse.waitingOrders[index].id]
                                 ? RightDragItem(
                                     order:
                                         orderListResponse.waitingOrders[index],
@@ -58,17 +59,17 @@ class OrderListView extends StatelessWidget {
                     padding: EdgeInsets.all(24),
                     child: Column(
                       children: <Widget>[
-//                        Expanded(
-//                          child: ListView.builder(
-//                              itemCount:
-//                                  orderListResponse.finishedOrders.length,
-//                              itemBuilder: (BuildContext context, int index) {
-//                                return LeftDragItem(
-//                                  order:
-//                                      orderListResponse.finishedOrders[index],
-//                                );
-//                              }),
-//                        ),
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount:
+                                  orderListResponse.finishedOrders.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return LeftDragItem(
+                                  order:
+                                      orderListResponse.finishedOrders[index],
+                                );
+                              }),
+                        ),
                         SizedBox(
                           height: 8.toHeight,
                         ),
@@ -80,23 +81,24 @@ class OrderListView extends StatelessWidget {
                                   builder: (BuildContext context,
                                       List<dynamic> candidateData,
                                       List<dynamic> rejectedData) {
-                                    return accepted1
+                                    return acceptTarget[orderListResponse
+                                            .waitingOrders[index].id]
                                         ? LeftDragItem(
                                             order: orderListResponse
                                                 .waitingOrders[index],
                                           )
                                         : Container(
-                                      margin: EdgeInsets.only(bottom: 16.toHeight),
-                                      height: 200,
-                                      width:
-                                      MediaQuery.of(context).size.width,
-                                      color: Colors.grey,
-                                    );
+                                            margin: EdgeInsets.only(
+                                                bottom: 16.toHeight),
+                                            height: 200,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            color: Colors.grey,
+                                          );
                                   },
                                   onWillAccept: (data) {
-                                    if (data == 1) {
-                                      accepted1 = true;
-                                    }
+                                    changeStatus(index);
                                     return true;
                                   },
                                 );

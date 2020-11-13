@@ -41,7 +41,7 @@ class InitPage extends StatelessWidget {
       backgroundColor: ThemeColor().greyColor,
       body: NestedNavigator(
           navigationKey: navigationKey,
-          initialRoute: '/login',
+          initialRoute: '/',
           routes: routeNames),
     );
   }
