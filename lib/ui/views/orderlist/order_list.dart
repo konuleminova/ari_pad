@@ -35,7 +35,8 @@ class OrderListView extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           return Draggable(
                             feedback: Container(
-                              width: MediaQuery.of(context).size.width / 2,
+                              height: 140.toHeight,
+                              width: 140.toWidth,
                               color: Colors.black,
                               padding: EdgeInsets.all(16),
                             ),
@@ -59,17 +60,24 @@ class OrderListView extends StatelessWidget {
                     padding: EdgeInsets.all(24),
                     child: Column(
                       children: <Widget>[
-                        Expanded(
-                          child: ListView.builder(
-                              itemCount:
-                                  orderListResponse.finishedOrders.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return LeftDragItem(
-                                  order:
-                                      orderListResponse.finishedOrders[index],
-                                );
-                              }),
-                        ),
+                        LimitedBox(
+                            //maxHeight: 300.0,
+                            child: ListView.separated(
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Container(
+                                    child: LeftDragItem(
+                                      order: orderListResponse
+                                          .finishedOrders[index],
+                                    ),
+                                    height: 140.toHeight,
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext contex, int index) =>
+                                        Divider(),
+                                itemCount:
+                                    orderListResponse.finishedOrders.length)),
                         SizedBox(
                           height: 8.toHeight,
                         ),
