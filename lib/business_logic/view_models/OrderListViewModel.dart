@@ -7,12 +7,15 @@ import 'package:ari_pad/ui/views/orderlist/order_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
+import 'package:ari_pad/utils/size_config.dart';
 class OrderListViewModel extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final ValueNotifier<Map<String, bool>> acceptTarget =
         useState<Map<String, bool>>(Map<String, bool>());
+    final ValueNotifier<double> scrollHeight = useState(0.toHeight);
+    final ValueNotifier<ScrollController> listScrollController =
+        useState(ScrollController());
     final ApiResponse<OrderListResponse> apiResponse = useOrderList();
 
     useMemoized(() {
@@ -29,6 +32,8 @@ class OrderListViewModel extends HookWidget {
     final changeStatus = useCallback((int index) {
       if (apiResponse.status == Status.Done) {
         acceptTarget.value[apiResponse.data.waitingOrders[index].id] = true;
+        scrollHeight.value=scrollHeight.value+140.toHeight;
+        listScrollController.value.jumpTo(scrollHeight.value);
         acceptTarget.notifyListeners();
       }
       return () {};
@@ -41,6 +46,7 @@ class OrderListViewModel extends HookWidget {
         orderListResponse: apiResponse.data,
         acceptTarget: acceptTarget.value,
         changeStatus: changeStatus,
+        scrollController: listScrollController.value,
       ),
     );
   }

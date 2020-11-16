@@ -8,8 +8,13 @@ import 'package:ari_pad/utils/size_config.dart';
 class OrderListView extends StatelessWidget {
   final OrderListResponse orderListResponse;
   Function(int index) changeStatus;
+  ScrollController scrollController;
 
-  OrderListView({this.orderListResponse, this.acceptTarget, this.changeStatus});
+  OrderListView(
+      {this.orderListResponse,
+      this.acceptTarget,
+      this.changeStatus,
+      this.scrollController});
 
   final Map<String, bool> acceptTarget;
 
@@ -83,6 +88,7 @@ class OrderListView extends StatelessWidget {
                         ),
                         Expanded(
                           child: ListView.builder(
+                              controller: scrollController,
                               itemCount: orderListResponse.waitingOrders.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return DragTarget<dynamic>(
