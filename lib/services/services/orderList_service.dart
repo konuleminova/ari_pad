@@ -14,7 +14,7 @@ ApiResponse<OrderListResponse> useOrderList() {
     apiConfig.ORDER_LIST(PreferenceUtils.getString('token')),
   );
   final DioConfig dioConfig = useMemoized(() => DioConfig<OrderListResponse>(
-      path: apiConfig.ORDER_LIST(''),
+      path: apiConfig.ORDER_LIST(PreferenceUtils.getString('token')),
       transformResponse: (Response response) =>
           OrderListResponse.fromJson(response.data)));
 
