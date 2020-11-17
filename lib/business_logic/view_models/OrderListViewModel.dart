@@ -12,13 +12,14 @@ import 'package:ari_pad/utils/size_config.dart';
 class OrderListViewModel extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<UniqueKey> keyRefresh = useState(UniqueKey());
     final ValueNotifier<Map<String, bool>> acceptTarget =
         useState<Map<String, bool>>(Map<String, bool>());
     final ValueNotifier<double> scrollHeight = useState(0.toHeight);
     final ValueNotifier<int> indexState = useState(0);
     final ValueNotifier<ScrollController> listScrollController =
         useState(ScrollController());
-    ApiResponse<OrderListResponse> apiResponse = useOrderList();
+    ApiResponse<OrderListResponse> apiResponse = useOrderList(keyRefresh.value);
     useMemoized(() {
       if (apiResponse.status == Status.Done) {
         apiResponse.data.waitingOrders.forEach((element) {
@@ -39,12 +40,20 @@ class OrderListViewModel extends HookWidget {
       if (apiResponse.status == Status.Done) {
         acceptTarget.value[apiResponse.data.waitingOrders[index].id] =
             !acceptTarget.value[apiResponse.data.waitingOrders[index].id];
-        scrollHeight.value = scrollHeight.value + 100.toHeight;
-        listScrollController.value.jumpTo(scrollHeight.value);
+        scrollHeight.value = 140.toHeight;
+        listScrollController.value.animateTo(
+            listScrollController.value.position.maxScrollExtent + 270.toHeight,
+            curve: Curves.easeOut,
+            duration: Duration(milliseconds: 500));
         acceptTarget.notifyListeners();
       }
       return () {};
     }, [apiResponse]);
+    final refreshOnDragEnd = useCallback(() {
+      keyRefresh.value = new UniqueKey();
+      scrollHeight.value = 0;
+      ;
+    });
 
     // TODO: implement build
     return CustomErrorHandler(
@@ -53,6 +62,8 @@ class OrderListViewModel extends HookWidget {
         orderListResponse: apiResponse.data,
         acceptTarget: acceptTarget.value,
         changeStatus: changeStatus,
+        onDragEnd: refreshOnDragEnd,
+        scrollHeight: scrollHeight.value,
         scrollController: listScrollController.value,
       ),
     );
