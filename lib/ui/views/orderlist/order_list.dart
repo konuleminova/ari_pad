@@ -52,75 +52,83 @@ class OrderListView extends StatelessWidget {
                                         orderListResponse.waitingOrders[index],
                                   )
                                 : Container(),
-                            data: 1 as dynamic,
+                            data: acceptTarget[orderListResponse
+                                .waitingOrders[index].id] as dynamic,
                           );
                         }),
                     color: Color(0xFF3F3F3F)),
               ),
               Expanded(
-                child: Container(
+                child:    SingleChildScrollView(
+                  child:Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.all(30),
                     padding: EdgeInsets.all(24),
-                    child: Column(
-                      children: <Widget>[
-                        LimitedBox(
-                            //maxHeight: 300.0,
-                            child: ListView.separated(
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Container(
-                                    child: LeftDragItem(
-                                      order: orderListResponse
-                                          .finishedOrders[index],
-                                    ),
-                                    height: 140.toHeight,
-                                  );
-                                },
-                                separatorBuilder:
-                                    (BuildContext contex, int index) =>
-                                        Divider(),
+                    child:  Column(
+                        children: <Widget>[
+                          LimitedBox(
+                               maxHeight: 300.toHeight,
+                              child: ListView.separated(
+                                  shrinkWrap: true,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      child: LeftDragItem(
+                                        order: orderListResponse
+                                            .finishedOrders[index],
+                                      ),
+                                      height: 140.toHeight,
+                                    );
+                                  },
+                                  separatorBuilder:
+                                      (BuildContext contex, int index) =>
+                                          Divider(),
+                                  itemCount:
+                                      orderListResponse.finishedOrders.length)),
+                          SizedBox(
+                            height: 8.toHeight,
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                                controller: scrollController,
                                 itemCount:
-                                    orderListResponse.finishedOrders.length)),
-                        SizedBox(
-                          height: 8.toHeight,
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                              controller: scrollController,
-                              itemCount: orderListResponse.waitingOrders.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return DragTarget<dynamic>(
-                                  builder: (BuildContext context,
-                                      List<dynamic> candidateData,
-                                      List<dynamic> rejectedData) {
-                                    return acceptTarget[orderListResponse
-                                            .waitingOrders[index].id]
-                                        ? LeftDragItem(
-                                            order: orderListResponse
-                                                .waitingOrders[index],
-                                          )
-                                        : Container(
-                                            margin: EdgeInsets.only(
-                                                bottom: 16.toHeight),
-                                            height: 200,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            color: Colors.grey,
-                                          );
-                                  },
-                                  onWillAccept: (data) {
-                                    changeStatus(index);
-                                    return true;
-                                  },
-                                );
-                              }),
-                        )
-                      ],
-                    ),
+                                    orderListResponse.waitingOrders.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return DragTarget<dynamic>(
+                                    builder: (BuildContext context,
+                                        List<dynamic> candidateData,
+                                        List<dynamic> rejectedData) {
+                                      return acceptTarget[orderListResponse
+                                              .waitingOrders[index].id]
+                                          ? LeftDragItem(
+                                              order: orderListResponse
+                                                  .waitingOrders[index],
+                                            )
+                                          : Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: 16.toHeight),
+                                              height: 200,
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              color: Colors.grey,
+                                            );
+                                    },
+                                    onWillAccept: (data) {
+                                      return true;
+                                    },
+                                    onAccept: (data) {
+                                      changeStatus(index);
+                                      return true;
+                                    },
+                                  );
+                                }),
+                          )
+                        ],
+                      ),
                     color: Color(0xFF3F3F3F)),
+              )
               )
             ],
           ),

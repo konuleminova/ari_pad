@@ -21,3 +21,14 @@ ApiResponse<OrderListResponse> useOrderList() {
   ApiResponse<OrderListResponse> apiResponse = useDioRequest(dioConfig);
   return apiResponse;
 }
+
+ApiResponse<OrderListResponse> useChangeStatus(String id) {
+  final ApiConfig apiConfig = useApiConfig();
+  print('CHNAGE STATUS${PreferenceUtils.getString('token')}id${id}');
+  final DioConfig dioConfig = useMemoized(() => DioConfig<OrderListResponse>(
+      path: apiConfig.CHANGE_STATUS(PreferenceUtils.getString('token'), id),
+      transformResponse: (Response response) =>
+          OrderListResponse.fromJson(response.data)));
+  ApiResponse<OrderListResponse> apiResponse = useDioRequest(dioConfig);
+  return apiResponse;
+}

@@ -15,16 +15,18 @@ class LeftDragItem extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(bottom: 8.toHeight),
+            margin: EdgeInsets.only(bottom: 8.toHeight),
             width: MediaQuery.of(context).size.width,
             color: Color(0xFF72D84B),
-            height: 200,
+            height: 140.toHeight,
             padding: EdgeInsets.all(16),
             child: Column(
               children: <Widget>[
-                Text(
-                  order.data,
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                Expanded(
+                  child: Text(
+                    order.data,
+                    style: TextStyle(color: Colors.black, fontSize: 18),
+                  ),
                 ),
                 SizedBox(
                   height: 4.toHeight,

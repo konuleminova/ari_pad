@@ -15,17 +15,19 @@ class RightDragItem extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(bottom: 8.toHeight),
+            margin: EdgeInsets.only(bottom: 8.toHeight),
             width: MediaQuery.of(context).size.width,
             color: Colors.black,
-            height: 200,
+            height: 140.toHeight,
             padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  order.data,
-                  style: TextStyle(color: Colors.white, fontSize: 18.toFont),
+                Expanded(
+                  child: Text(
+                    order.data,
+                    style: TextStyle(color: Colors.white, fontSize: 18.toFont),
+                  ),
                 ),
                 SizedBox(
                   height: 8.toHeight,
