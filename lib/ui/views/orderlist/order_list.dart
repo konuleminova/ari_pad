@@ -45,6 +45,7 @@ class OrderListView extends StatelessWidget {
                         physics: AlwaysScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, int index) {
                           return Draggable(
+                            affinity: Axis.horizontal,
                             feedback: Container(
                               height: 140.toHeight,
                               width: 140.toWidth,
