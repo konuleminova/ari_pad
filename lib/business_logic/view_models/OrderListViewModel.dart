@@ -52,7 +52,6 @@ class OrderListViewModel extends HookWidget {
     final refreshOnDragEnd = useCallback(() {
       keyRefresh.value = new UniqueKey();
       scrollHeight.value = 0;
-      ;
     });
 
     // TODO: implement build

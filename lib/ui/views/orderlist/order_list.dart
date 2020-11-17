@@ -56,6 +56,7 @@ class OrderListView extends StatelessWidget {
                             },
                             onDragEnd: (data) {
                               onDragEnd();
+                              onRefresh();
                             },
                             child: !acceptTarget[
                                     orderListResponse.waitingOrders[index].id]
@@ -124,7 +125,6 @@ class OrderListView extends StatelessWidget {
                               return true;
                             },
                             onAccept: (data) {
-                              onRefresh();
                               return true;
                             },
                           ),
