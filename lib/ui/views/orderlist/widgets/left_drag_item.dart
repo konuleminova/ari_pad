@@ -21,6 +21,7 @@ class LeftDragItem extends StatelessWidget {
             height: 140.toHeight,
             padding: EdgeInsets.all(16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
                   child: Text(
@@ -33,7 +34,7 @@ class LeftDragItem extends StatelessWidget {
                 ),
                 Text(order.dt,
                     style: TextStyle(
-                      color: ThemeColor().yellowColor,
+                      color: ThemeColor().greyColor,
                       fontSize: 14.toFont,
                     ))
               ],
