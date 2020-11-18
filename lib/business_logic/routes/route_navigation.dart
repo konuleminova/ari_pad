@@ -1,5 +1,4 @@
-import 'package:ari_pad/business_logic/routes/route_names.dart';
-
+import 'package:ari_pad/ui/views/init.dart';
 
 void pushRouteWithName(String name, {RouteArguments arguments}) {
   navigationKey.currentState.pushNamed(name, arguments: arguments);

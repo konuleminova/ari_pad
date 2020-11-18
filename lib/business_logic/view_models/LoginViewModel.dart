@@ -37,7 +37,7 @@ class LoginViewModel extends HookWidget {
       if (apiResponse?.data?.token != null) {
         PreferenceUtils.setString('token', apiResponse.data.token);
         PreferenceUtils.setString('name surname', apiResponse.data.name);
-        pushRouteWithName('/');
+        pushRouteWithName('/home');
       }
       if (apiResponse.status == Status.Error) {
         showDialog(

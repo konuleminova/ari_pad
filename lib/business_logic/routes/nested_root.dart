@@ -1,3 +1,4 @@
+import 'package:ari_pad/ui/main.dart';
 import 'package:flutter/material.dart';
 
 class NestedNavigator extends StatelessWidget {

@@ -30,11 +30,11 @@ class OrderListViewModel extends HookWidget {
         });
       }
     }, [apiResponse]);
-    useChangeStatus(apiResponse?.data?.waitingOrders[indexState?.value].id,keyRefresh.value);
 
-//    useCallback(() {
-//
-//    }, [indexState]);
+    useCallback(() {
+      useChangeStatus(apiResponse?.data?.waitingOrders[indexState?.value].id,
+          keyRefresh.value);
+    }, [indexState]);
 
     final changeStatus = useCallback((int index) {
       indexState.value = index;
