@@ -29,7 +29,7 @@ class OrderListView extends StatelessWidget {
     // TODO: implement build
     return Stack(
       children: <Widget>[
-        Expanded(
+        Container(
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,7 +42,7 @@ class OrderListView extends StatelessWidget {
                     padding: EdgeInsets.all(24),
                     child: ListView.builder(
                         itemCount: orderListResponse.waitingOrders.length,
-                        physics: AlwaysScrollableScrollPhysics(),
+                        padding: EdgeInsets.only(bottom: 80.toHeight),
                         itemBuilder: (BuildContext context, int index) {
                           return Draggable(
                             affinity: Axis.horizontal,
@@ -73,111 +73,59 @@ class OrderListView extends StatelessWidget {
                     color: Color(0xFF3F3F3F)),
               ),
               Expanded(
-                  child: SingleChildScrollView(
-                controller: scrollController,
                 child: Container(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.all(30),
                     padding: EdgeInsets.all(24),
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: DragTarget<dynamic>(
-                            builder: (BuildContext context,
-                                List<dynamic> candidateData,
-                                List<dynamic> rejectedData) {
-                              return Column(
-                                children: <Widget>[
-                                  Expanded(
-                                      //  maxHeight: 300.toHeight,
-                                      child: ListView.separated(
-                                          //controller: scrollController,
-                                          //physics: NeverScrollableScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return Container(
-                                              child: LeftDragItem(
-                                                order: orderListResponse
-                                                    .finishedOrders[index],
-                                              ),
-                                              height: 140.toHeight,
-                                            );
-                                          },
-                                          separatorBuilder:
-                                              (BuildContext contex,
-                                                      int index) =>
-                                                  Divider(),
-                                          itemCount: orderListResponse
-                                              .finishedOrders.length)),
-                                  //                        SizedBox(height: 8.toHeight,),
-                                  Container(
-                                    margin:
-                                        EdgeInsets.only(bottom: 16.toHeight),
-                                    height: scrollHeight,
-                                    width: MediaQuery.of(context).size.width,
-                                    color: Colors.grey,
-                                  )
-                                ],
-                              );
-                            },
-                            onWillAccept: (data) {
-                              return true;
-                            },
-                            onAccept: (data) {
-                              return true;
-                            },
-                          ),
-                        ),
-
-//                        SizedBox(height: 8.toHeight,),
-//                        Container(
-//                          margin: EdgeInsets.only(bottom: 16.toHeight),
-//                          height: 100.toHeight,
-//                          width: MediaQuery.of(context).size.width,
-//                          color: Colors.grey,
-//                        )
-//                          Expanded(
-//                            child: ListView.builder(
-//                                controller: scrollController,
-//                                itemCount:
-//                                    orderListResponse.waitingOrders.length,
-//                                itemBuilder: (BuildContext context, int index) {
-//                                  return DragTarget<dynamic>(
-//                                    builder: (BuildContext context,
-//                                        List<dynamic> candidateData,
-//                                        List<dynamic> rejectedData) {
-//                                      return acceptTarget[orderListResponse
-//                                              .waitingOrders[index].id]
-//                                          ? LeftDragItem(
-//                                              order: orderListResponse
-//                                                  .waitingOrders[index],
-//                                            )
-//                                          : Container(
-//                                              margin: EdgeInsets.only(
-//                                                  bottom: 16.toHeight),
-//                                              height: 200,
-//                                              width: MediaQuery.of(context)
-//                                                  .size
-//                                                  .width,
-//                                              color: Colors.grey,
-//                                            );
-//                                    },
-//                                    onWillAccept: (data) {
-//                                      return true;
-//                                    },
-//                                    onAccept: (data) {
-//                                      changeStatus(index);
-//                                      return true;
-//                                    },
-//                                  );
-//                                }),
-//                          )
-                      ],
+                    child: Expanded(
+                      child: DragTarget<dynamic>(
+                        builder: (BuildContext context,
+                            List<dynamic> candidateData,
+                            List<dynamic> rejectedData) {
+                          return Column(
+                            children: <Widget>[
+                              Expanded(
+                                  child: ListView.separated(
+                                      padding:
+                                          EdgeInsets.only(bottom: 80.toHeight),
+                                      controller: scrollController,
+                                      shrinkWrap: true,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Container(
+                                          child: LeftDragItem(
+                                            order: orderListResponse
+                                                .finishedOrders[index],
+                                          ),
+                                          height: 140.toHeight,
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext contex, int index) =>
+                                              Divider(),
+                                      itemCount: orderListResponse
+                                          .finishedOrders.length)),
+                              //                        SizedBox(height: 8.toHeight,),
+                              Container(
+                                margin: EdgeInsets.only(bottom: 16.toHeight),
+                                height: scrollHeight,
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.grey,
+                              )
+                            ],
+                          );
+                        },
+                        onWillAccept: (data) {
+                          return true;
+                        },
+                        onAccept: (data) {
+                          return true;
+                        },
+                      ),
                     ),
                     color: Color(0xFF3F3F3F)),
-              ))
+              )
             ],
           ),
         ),
@@ -186,7 +134,11 @@ class OrderListView extends StatelessWidget {
           left: 0,
           right: 0,
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 44),
+            margin: EdgeInsets.symmetric(
+              horizontal: 44,
+            ),
+            padding: EdgeInsets.only(
+                top: 34.toHeight, left: 8.toWidth, right: 8.toWidth),
             height: 100,
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -194,6 +146,11 @@ class OrderListView extends StatelessWidget {
                       'assets/images/ellipse.png',
                     ),
                     fit: BoxFit.cover)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[Text('Name surname'), Text('Name surname')],
+            ),
           ),
         )
       ],

@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                   child: TextField(
                     controller: loginController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 8.toWidth),
+                        contentPadding: EdgeInsets.only(left: 4.toWidth),
                         hintText: 'Login',
                         border: InputBorder.none),
                   ),
@@ -56,7 +56,7 @@ class LoginView extends StatelessWidget {
                   child: TextField(
                     controller: passController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(left: 8.toWidth),
+                        contentPadding: EdgeInsets.only(left: 4.toWidth),
                         hintText: 'Password',
                         border: InputBorder.none),
                   ),
