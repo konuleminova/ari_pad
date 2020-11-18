@@ -1,6 +1,9 @@
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
+import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/left_drag_item.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/right_drag_item.dart';
+import 'package:ari_pad/utils/sharedpref/prefence_util.dart';
+import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ari_pad/utils/size_config.dart';
@@ -138,8 +141,9 @@ class OrderListView extends StatelessWidget {
               horizontal: 44,
             ),
             padding: EdgeInsets.only(
-                top: 34.toHeight, left: 8.toWidth, right: 8.toWidth),
+                top: 24.toHeight, left: 8.toWidth, right: 8.toWidth),
             height: 100,
+            alignment: Alignment.topCenter,
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
@@ -149,7 +153,33 @@ class OrderListView extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[Text('Name surname'), Text('Name surname')],
+              children: <Widget>[
+                Container(
+                  child: Text(
+                    PreferenceUtils.getString('name surname') ?? "Name Surname",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  // width: 44.toWidth,
+                  height: 50.toHeight,
+                  alignment: Alignment.center,
+                ),
+                InkWell(
+                  child: Container(
+                    width: 44.toWidth,
+                    height: 50.toHeight,
+                    alignment: Alignment.center,
+                    color: ThemeColor().greyColor.withOpacity(0.33),
+                    child: Text(
+                      'Çıxış',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  onTap: () {
+                    PreferenceUtils.clearKey('token');
+                    pushRouteWithName('/login');
+                  },
+                )
+              ],
             ),
           ),
         )

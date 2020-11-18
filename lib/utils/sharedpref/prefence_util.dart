@@ -20,4 +20,9 @@ class PreferenceUtils {
     var prefs = await _instance;
     return prefs?.setString(key, value) ?? Future.value(false);
   }
+
+  static Future<bool> clearKey(String key) async {
+    var prefs = await _instance;
+    return prefs?.remove(key) ?? Future.value(false);
+  }
 }
