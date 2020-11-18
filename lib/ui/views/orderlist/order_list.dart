@@ -29,7 +29,7 @@ class OrderListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('WAITING ORDERS ${ orderListResponse.waitingOrders.length}');
+    print('WAITING ORDERS ${orderListResponse.waitingOrders.length}');
     // TODO: implement build
     return Container(
         height: SizeConfig().screenHeight,
@@ -70,12 +70,12 @@ class OrderListView extends StatelessWidget {
                                 onDragEnd();
                                 onRefresh();
                               },
-                              child: !acceptTarget[orderListResponse
-                                  .waitingOrders[index].id]
+                              child: !acceptTarget[
+                                      orderListResponse.waitingOrders[index].id]
                                   ? RightDragItem(
-                                order: orderListResponse
-                                    .waitingOrders[index],
-                              )
+                                      order: orderListResponse
+                                          .waitingOrders[index],
+                                    )
                                   : Container(),
                               data: acceptTarget[orderListResponse
                                   .waitingOrders[index].id] as dynamic,
@@ -101,8 +101,8 @@ class OrderListView extends StatelessWidget {
                                             bottom: 80.toHeight),
                                         controller: scrollController,
                                         shrinkWrap: true,
-                                        itemBuilder: (BuildContext context,
-                                            int index) {
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
                                           return Container(
                                             child: LeftDragItem(
                                               order: orderListResponse
@@ -112,15 +112,13 @@ class OrderListView extends StatelessWidget {
                                           );
                                         },
                                         separatorBuilder:
-                                            (BuildContext contex,
-                                            int index) =>
-                                            Divider(),
+                                            (BuildContext contex, int index) =>
+                                                Divider(),
                                         itemCount: orderListResponse
                                             .finishedOrders.length)),
                                 //                        SizedBox(height: 8.toHeight,),
                                 Container(
-                                  margin:
-                                  EdgeInsets.only(bottom: 16.toHeight),
+                                  margin: EdgeInsets.only(bottom: 16.toHeight),
                                   height: scrollHeight,
                                   width: MediaQuery.of(context).size.width,
                                   color: Colors.grey,
@@ -185,7 +183,7 @@ class OrderListView extends StatelessWidget {
                       ),
                       onTap: () {
                         PreferenceUtils.clearKey('token');
-                        pushRouteWithName('/login');
+                        pushReplaceRouteWithName('/');
                       },
                     )
                   ],
