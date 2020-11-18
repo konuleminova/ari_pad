@@ -20,6 +20,7 @@ class OrderListViewModel extends HookWidget {
     final ValueNotifier<ScrollController> listScrollController =
         useState(ScrollController());
     ApiResponse<OrderListResponse> apiResponse = useOrderList(keyRefresh.value);
+
     useMemoized(() {
       if (apiResponse.status == Status.Done) {
         apiResponse.data.waitingOrders.forEach((element) {

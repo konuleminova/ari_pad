@@ -29,6 +29,7 @@ class OrderListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('WAITING ORDERS ${ orderListResponse.waitingOrders.length}');
     // TODO: implement build
     return Container(
         height: SizeConfig().screenHeight,
@@ -36,27 +37,25 @@ class OrderListView extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-              width: SizeConfig().screenWidth,
-              height: SizeConfig().screenHeight,
+//              width: SizeConfig().screenWidth,
+//              height: SizeConfig().screenHeight,
               child: Row(
-               // mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Container(
-                    height: SizeConfig().screenHeight,
-                    width: SizeConfig().screenWidth / 2,
-                    margin: EdgeInsets.all(30),
-                    padding: EdgeInsets.all(24),
-                    color: Color(0xFF3F3F3F),
-                    child: ListView.separated(
-                        separatorBuilder:
-                            (BuildContext contex, int index) => Divider(),
-                        shrinkWrap: true,
-                        itemCount: orderListResponse.waitingOrders.length,
-                        padding: EdgeInsets.only(bottom: 80.toHeight),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            child: Draggable(
+                  Expanded(
+                    child: Container(
+                      height: SizeConfig().screenHeight,
+                      width: SizeConfig().screenWidth,
+                      margin: EdgeInsets.all(30),
+                      padding: EdgeInsets.all(24),
+                      color: Color(0xFF3F3F3F),
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: orderListResponse.waitingOrders.length,
+                          padding: EdgeInsets.only(bottom: 80.toHeight),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Draggable(
                               affinity: Axis.horizontal,
                               feedback: Container(
                                 height: 140.toHeight,
@@ -80,17 +79,16 @@ class OrderListView extends StatelessWidget {
                                   : Container(),
                               data: acceptTarget[orderListResponse
                                   .waitingOrders[index].id] as dynamic,
-                            ),
-                            height: 140.toHeight,
-                          );
-                        }),
+                            );
+                          }),
+                    ),
                   ),
-                  Container(
-                      height: MediaQuery.of(context).size.height,
-                      width: MediaQuery.of(context).size.width / 2,
-                      margin: EdgeInsets.all(30),
-                      padding: EdgeInsets.all(24),
-                      child: Expanded(
+                  Expanded(
+                    child: Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width / 2,
+                        margin: EdgeInsets.all(30),
+                        padding: EdgeInsets.all(24),
                         child: DragTarget<dynamic>(
                           builder: (BuildContext context,
                               List<dynamic> candidateData,
@@ -103,8 +101,8 @@ class OrderListView extends StatelessWidget {
                                             bottom: 80.toHeight),
                                         controller: scrollController,
                                         shrinkWrap: true,
-                                        itemBuilder:
-                                            (BuildContext context, int index) {
+                                        itemBuilder: (BuildContext context,
+                                            int index) {
                                           return Container(
                                             child: LeftDragItem(
                                               order: orderListResponse
@@ -114,13 +112,15 @@ class OrderListView extends StatelessWidget {
                                           );
                                         },
                                         separatorBuilder:
-                                            (BuildContext contex, int index) =>
-                                                Divider(),
+                                            (BuildContext contex,
+                                            int index) =>
+                                            Divider(),
                                         itemCount: orderListResponse
                                             .finishedOrders.length)),
                                 //                        SizedBox(height: 8.toHeight,),
                                 Container(
-                                  margin: EdgeInsets.only(bottom: 16.toHeight),
+                                  margin:
+                                  EdgeInsets.only(bottom: 16.toHeight),
                                   height: scrollHeight,
                                   width: MediaQuery.of(context).size.width,
                                   color: Colors.grey,
@@ -135,8 +135,8 @@ class OrderListView extends StatelessWidget {
                             return true;
                           },
                         ),
-                      ),
-                      color: Color(0xFF3F3F3F)),
+                        color: Color(0xFF3F3F3F)),
+                  )
                 ],
               ),
             ),
