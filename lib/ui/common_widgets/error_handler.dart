@@ -55,7 +55,8 @@ class ErrorDialog extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
           padding: EdgeInsets.all(16.toHeight),
-          height: 140.toHeight,
+          height: 120.toWidth,
+          width: 180.toWidth,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
           child: Center(
               child: Column(
@@ -82,7 +83,7 @@ class ErrorDialog extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 16.toWidth),
-                height: 34.toHeight,
+                height: 24.toWidth,
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4)),
