@@ -14,8 +14,6 @@ class InitPage extends StatelessWidget {
     PreferenceUtils.init();
     // TODO: implement build
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      resizeToAvoidBottomPadding: false,
       backgroundColor: ThemeColor().greyColor,
       body: NestedNavigator(
           navigationKey: navigationKey,

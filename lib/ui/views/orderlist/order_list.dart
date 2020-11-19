@@ -139,7 +139,7 @@ class OrderListView extends StatelessWidget {
                   horizontal: 44,
                 ),
                 padding: EdgeInsets.only(
-                    top: 24.toHeight, left: 8.toWidth, right: 8.toWidth),
+                    top: 4.toHeight, left: 8.toWidth, right: 8.toWidth),
                 height: 100,
                 alignment: Alignment.topCenter,
                 decoration: BoxDecoration(
@@ -165,7 +165,7 @@ class OrderListView extends StatelessWidget {
                     InkWell(
                       child: Container(
                         width: 44.toWidth,
-                        height: 50.toHeight,
+                        height: 40.toHeight,
                         alignment: Alignment.center,
                         color: ThemeColor().greyColor.withOpacity(0.33),
                         child: Text(
