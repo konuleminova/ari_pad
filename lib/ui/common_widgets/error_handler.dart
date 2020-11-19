@@ -1,7 +1,6 @@
 import 'package:ari_pad/services/api_helper/api_response.dart';
 import 'package:ari_pad/services/hooks/useSideEffect.dart';
 import 'package:ari_pad/utils/size_config.dart';
-import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

@@ -10,26 +10,23 @@ import 'package:ari_pad/utils/size_config.dart';
 
 class OrderListView extends StatelessWidget {
   final OrderListResponse orderListResponse;
-  Function(int index) changeStatus;
-  Function onRefresh;
+  Function(int index) onDragStartCallback;
   ScrollController scrollController;
-  Function onDragEnd;
-  double scrollHeight;
+  Function onDragAcceptCallBack;
+  Function onRefreshDataCallBack;
 
   OrderListView(
       {this.orderListResponse,
       this.acceptTarget,
-      this.changeStatus,
+      this.onDragStartCallback,
       this.scrollController,
-      this.onDragEnd,
-      this.scrollHeight,
-      this.onRefresh});
+      this.onDragAcceptCallBack,
+      this.onRefreshDataCallBack});
 
   final Map<String, bool> acceptTarget;
 
   @override
   Widget build(BuildContext context) {
-    print('WAITING ORDERS ${orderListResponse.waitingOrders.length}');
     // TODO: implement build
     return Container(
         height: SizeConfig().screenHeight,
@@ -37,8 +34,6 @@ class OrderListView extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Container(
-//              width: SizeConfig().screenWidth,
-//              height: SizeConfig().screenHeight,
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,11 +59,7 @@ class OrderListView extends StatelessWidget {
                                 padding: EdgeInsets.all(16),
                               ),
                               onDragStarted: () {
-                                changeStatus(index);
-                              },
-                              onDragEnd: (data) {
-                                onDragEnd();
-                                onRefresh();
+                                onDragStartCallback(index);
                               },
                               child: !acceptTarget[
                                       orderListResponse.waitingOrders[index].id]
@@ -119,7 +110,6 @@ class OrderListView extends StatelessWidget {
                                 //                        SizedBox(height: 8.toHeight,),
                                 Container(
                                   margin: EdgeInsets.only(bottom: 16.toHeight),
-                                  height: scrollHeight,
                                   width: MediaQuery.of(context).size.width,
                                   color: Colors.grey,
                                 )
@@ -130,6 +120,8 @@ class OrderListView extends StatelessWidget {
                             return true;
                           },
                           onAccept: (data) {
+                            onDragAcceptCallBack();
+                            onRefreshDataCallBack();
                             return true;
                           },
                         ),
