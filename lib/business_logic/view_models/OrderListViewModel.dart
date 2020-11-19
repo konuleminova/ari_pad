@@ -51,13 +51,13 @@ class OrderListViewModel extends HookWidget {
     }, [indexState.value]);
 
     //On Drag Accept CallBack
-    useCallback(() {
-      useChangeStatus(apiResponse?.data?.waitingOrders[indexState?.value].id,
-          keyRefresh2.value);
-    }, [keyRefresh2.value]);
+    useChangeStatus(apiResponse?.data?.waitingOrders[indexState?.value].id,
+        keyRefresh2.value);
 
     final onDragAcceptCallBack = useCallback(() {
-      keyRefresh2.value = new UniqueKey();
+      if (apiResponse?.data?.waitingOrders!=null) {
+        keyRefresh2.value = new UniqueKey();
+      }
     }, [keyRefresh2.value]);
 //On refresh Data Callback
     final onRefreshDataCallBack = useCallback(() {
