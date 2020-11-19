@@ -64,21 +64,19 @@ class LoginView extends StatelessWidget {
                   height: 24.toHeight,
                 ),
                 InkWell(
-                  child: CustomErrorHandler(
-                      statuses: [apiResponse.status],
-                      child: Container(
-                        // height: 50.toHeight,
-                        color: Colors.black,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          enabled: false,
-                          decoration: InputDecoration(
-                              //contentPadding: EdgeInsets.only(left: 8.toWidth),
-                              hintText: 'LOGIN',
-                              hintStyle: TextStyle(color: Colors.white),
-                              border: InputBorder.none),
-                        ),
-                      )),
+                  child: Container(
+                    // height: 50.toHeight,
+                    color: Colors.black,
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      enabled: false,
+                      decoration: InputDecoration(
+                        //contentPadding: EdgeInsets.only(left: 8.toWidth),
+                          hintText: 'LOGIN',
+                          hintStyle: TextStyle(color: Colors.white),
+                          border: InputBorder.none),
+                    ),
+                  ),
                   onTap: () {
                     loginCallback();
                   },

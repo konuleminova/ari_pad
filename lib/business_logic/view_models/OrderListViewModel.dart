@@ -59,6 +59,7 @@ class OrderListViewModel extends HookWidget {
     // TODO: implement build
     return CustomErrorHandler(
       statuses: [apiResponse.status],
+      errors: [apiResponse.error],
       child: OrderListView(
         orderListResponse: apiResponse.data,
         acceptTarget: acceptTarget.value,
