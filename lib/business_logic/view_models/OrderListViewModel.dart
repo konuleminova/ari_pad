@@ -54,7 +54,7 @@ class OrderListViewModel extends HookWidget {
     useCallback(() {
       useChangeStatus(apiResponse?.data?.waitingOrders[indexState?.value].id,
           keyRefresh2.value);
-    }, []);
+    }, [keyRefresh2.value]);
 
     final onDragAcceptCallBack = useCallback(() {
       keyRefresh2.value = new UniqueKey();
