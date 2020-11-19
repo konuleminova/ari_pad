@@ -19,6 +19,7 @@ class OrderListViewModel extends HookWidget {
     final ValueNotifier<int> indexState = useState(0);
     final ValueNotifier<ScrollController> listScrollController =
         useState(ScrollController());
+
     //Use fetch Order list
     ApiResponse<OrderListResponse> apiResponse =
         useOrderList(keyRefresh1.value);
