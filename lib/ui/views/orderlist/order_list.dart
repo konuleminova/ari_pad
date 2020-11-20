@@ -10,7 +10,7 @@ import 'package:ari_pad/utils/size_config.dart';
 
 class OrderListView extends StatelessWidget {
   final OrderListResponse orderListResponse;
-  Function(int index) onDragStartCallback;
+  Function(String id) onDragStartCallback;
   ScrollController scrollController;
   Function onDragAcceptCallBack;
   Function onRefreshDataCallBack;
@@ -59,7 +59,7 @@ class OrderListView extends StatelessWidget {
                                 padding: EdgeInsets.all(16),
                               ),
                               onDragStarted: () {
-                                onDragStartCallback(index);
+                                onDragStartCallback(orderListResponse.waitingOrders[index].id);
                               },
                               child: !acceptTarget[
                                       orderListResponse.waitingOrders[index].id]

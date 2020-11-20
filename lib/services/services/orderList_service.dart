@@ -11,22 +11,27 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 ApiResponse<OrderListResponse> useOrderList(UniqueKey key) {
   final ApiConfig apiConfig = useApiConfig();
-  final DioConfig dioConfig = useMemoized(() => DioConfig<OrderListResponse>(
-      path: apiConfig.ORDER_LIST(PreferenceUtils.getString('token')),
-      transformResponse: (Response response) =>
-          OrderListResponse.fromJson(response.data)),[key]);
+  final DioConfig dioConfig = useMemoized(
+      () => DioConfig<OrderListResponse>(
+          path: apiConfig.ORDER_LIST(PreferenceUtils.getString('token')),
+          transformResponse: (Response response) =>
+              OrderListResponse.fromJson(response.data)),
+      [key]);
 
   ApiResponse<OrderListResponse> apiResponse = useDioRequest(dioConfig);
   return apiResponse;
 }
 
-ApiResponse<OrderListResponse> useChangeStatus(String id,UniqueKey key) {
+ApiResponse<OrderListResponse> useChangeStatus(String id, UniqueKey key) {
   final ApiConfig apiConfig = useApiConfig();
-  print('CHNAGE STATUS${PreferenceUtils.getString('token')}id${id}');
-  final DioConfig dioConfig = useMemoized(() => DioConfig<OrderListResponse>(
-      path: apiConfig.CHANGE_STATUS(PreferenceUtils.getString('token'), id),
-      transformResponse: (Response response) =>
-          OrderListResponse.fromJson(response.data)),[key,id]);
+  print('CHNAGE STATUS ');
+  final DioConfig dioConfig = useMemoized(
+          () => DioConfig<OrderListResponse>(
+          path:
+          apiConfig.CHANGE_STATUS(PreferenceUtils.getString('token'), id),
+          transformResponse: (Response response) =>
+              OrderListResponse.fromJson(response.data)),
+      [key, id]);
   ApiResponse<OrderListResponse> apiResponse = useDioRequest(dioConfig);
   return apiResponse;
 }

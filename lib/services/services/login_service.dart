@@ -8,8 +8,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 ApiResponse<RestourantResponse> useLogin(String login, String password) {
+  final ApiConfig apiConfig = useApiConfig();
   if (login != null && password != null) {
-    final ApiConfig apiConfig = useApiConfig();
     final DioConfig dioConfig = useMemoized(
         () => DioConfig<RestourantResponse>(
               path: apiConfig.LOGIN(login, password),

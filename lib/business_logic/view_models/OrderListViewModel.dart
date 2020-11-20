@@ -12,14 +12,15 @@ import 'package:ari_pad/utils/size_config.dart';
 class OrderListViewModel extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<UniqueKey> keyRefresh1 = useState(UniqueKey());
-    final ValueNotifier<UniqueKey> keyRefresh2 = useState(UniqueKey());
+    final ValueNotifier<UniqueKey> keyRefresh1 = useState();
+    final ValueNotifier<UniqueKey> keyRefresh2 = useState();
     final ValueNotifier<Map<String, bool>> acceptTarget =
         useState<Map<String, bool>>(Map<String, bool>());
-    final ValueNotifier<int> indexState = useState(0);
+    final ValueNotifier<String> id = useState();
     final ValueNotifier<ScrollController> listScrollController =
         useState(ScrollController());
-
+    //On Drag Accept CallBack
+    useChangeStatus(id?.value, keyRefresh2?.value);
     //Use fetch Order list
     ApiResponse<OrderListResponse> apiResponse =
         useOrderList(keyRefresh1.value);
@@ -36,8 +37,8 @@ class OrderListViewModel extends HookWidget {
     }, [apiResponse]);
 
     //On drag Started Callback
-    final onDragStartCallBack = useCallback((int index) {
-      indexState.value = index;
+    final onDragStartCallBack = useCallback((String idWaitingOrder) {
+      id.value = idWaitingOrder;
       listScrollController.value.animateTo(
           listScrollController.value.position.maxScrollExtent + 270.toHeight,
           curve: Curves.easeOut,
@@ -49,17 +50,13 @@ class OrderListViewModel extends HookWidget {
 //        acceptTarget.notifyListeners();
 //      }
       return () {};
-    }, [indexState.value]);
+    }, [id.value]);
 
-    //On Drag Accept CallBack
-    useChangeStatus(apiResponse?.data?.waitingOrders[indexState?.value].id,
-        keyRefresh2.value);
 
     final onDragAcceptCallBack = useCallback(() {
-      if (apiResponse?.data?.waitingOrders!=null) {
-        keyRefresh2.value = new UniqueKey();
-      }
+      keyRefresh2.value = new UniqueKey();
     }, [keyRefresh2.value]);
+
 //On refresh Data Callback
     final onRefreshDataCallBack = useCallback(() {
       keyRefresh1.value = new UniqueKey();
