@@ -25,13 +25,15 @@ ApiResponse<OrderListResponse> useOrderList(UniqueKey key) {
 ApiResponse<OrderListResponse> useChangeStatus(String id, UniqueKey key) {
   final ApiConfig apiConfig = useApiConfig();
   final DioConfig dioConfig = useMemoized(
-      () => key == null
-          ? null
-          : DioConfig<OrderListResponse>(
-              path: apiConfig.CHANGE_STATUS(
-                  PreferenceUtils.getString('token'), id),
-              transformResponse: (Response response) =>
-                  OrderListResponse.fromJson(response.data)),
+      () {
+        if(key == null)
+            return null;
+            else return DioConfig<OrderListResponse>(
+            path: apiConfig.CHANGE_STATUS(
+                PreferenceUtils.getString('token'), id),
+            transformResponse: (Response response) =>
+                OrderListResponse.fromJson(response.data));
+      },
       [key]);
   ApiResponse<OrderListResponse> apiResponse = useDioRequest(dioConfig);
   return apiResponse;

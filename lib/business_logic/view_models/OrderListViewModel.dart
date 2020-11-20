@@ -52,7 +52,6 @@ class OrderListViewModel extends HookWidget {
       return () {};
     }, [id.value]);
 
-
     final onDragAcceptCallBack = useCallback(() {
       keyRefresh2.value = new UniqueKey();
     }, [keyRefresh2.value]);

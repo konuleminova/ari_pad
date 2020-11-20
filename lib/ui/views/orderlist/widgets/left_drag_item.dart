@@ -25,7 +25,7 @@ class LeftDragItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Text(
-                    order.data,
+                    order.data.toString(),
                     style: TextStyle(color: Colors.black, fontSize: 18),
                   ),
                 ),

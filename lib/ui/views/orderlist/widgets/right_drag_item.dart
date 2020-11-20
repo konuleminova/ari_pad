@@ -27,7 +27,7 @@ class RightDragItem extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Text(
-                    order.data??'',
+                    order.data.toString()??'',
                     style: TextStyle(color: Colors.white, fontSize: 18.toFont),
                   ),
                 ),
