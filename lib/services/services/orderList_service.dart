@@ -31,7 +31,7 @@ ApiResponse<OrderListResponse> useChangeStatus(String id, UniqueKey key) {
           apiConfig.CHANGE_STATUS(PreferenceUtils.getString('token'), id),
           transformResponse: (Response response) =>
               OrderListResponse.fromJson(response.data)),
-      [key, id]);
+      [key]);
   ApiResponse<OrderListResponse> apiResponse = useDioRequest(dioConfig);
   return apiResponse;
 }
