@@ -11,22 +11,19 @@ class RightDragItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int datTime = (DateTime.now().millisecondsSinceEpoch -
-        DateTime.parse(order.dt).millisecondsSinceEpoch);
     // TODO: implement build
     return Stack(
       children: <Widget>[
         Container(
-            margin: EdgeInsets.only(bottom: 8.toHeight),
+            margin: EdgeInsets.only(
+                bottom: 8.toHeight, right: 4.toWidth, top: 16.toHeight),
             width: MediaQuery.of(context).size.width,
             color: Colors.black,
-            height: 140.toHeight,
             padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Expanded(
-                    child: ListView.builder(
+                ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,16 +67,30 @@ class RightDragItem extends StatelessWidget {
                     );
                   },
                   itemCount: order.data.length,
-                )),
+                  shrinkWrap: true,
+                ),
                 SizedBox(
                   height: 8.toHeight,
                 ),
-                Text(
-                  DateTime.parse(order.dt).toString(),
-                  style: TextStyle(
-                    color: ThemeColor().yellowColor,
-                    fontSize: 14.toFont,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      DateTime.parse(order.dt).toString(),
+                      style: TextStyle(
+                        color: ThemeColor().yellowColor,
+                        fontSize: 14.toFont,
+                      ),
+                    ),
+                    Text(
+                     order.id??'',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.toFont,
+                        fontWeight: FontWeight.w600
+                      ),
+                    )
+                  ],
                 )
               ],
             )),
@@ -87,6 +98,7 @@ class RightDragItem extends StatelessWidget {
             right: 0,
             top: 0,
             child: CircleAvatar(
+              radius: 14.toFont,
               child: Icon(
                 Icons.more_horiz,
                 color: Colors.black,

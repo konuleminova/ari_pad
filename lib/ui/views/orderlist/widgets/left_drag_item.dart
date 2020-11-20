@@ -15,34 +15,77 @@ class LeftDragItem extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Container(
-            margin: EdgeInsets.only(bottom: 8.toHeight),
+            margin: EdgeInsets.only(
+                bottom: 8.toHeight, top: 16.toHeight, right: 4.toWidth),
             width: MediaQuery.of(context).size.width,
             color: Color(0xFF72D84B),
-            height: 140.toHeight,
+            // height: 140.toHeight,
             padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Expanded(
-                  child: Text(
-                    order.data.toString(),
-                    style: TextStyle(color: Colors.black, fontSize: 18),
-                  ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Text(
+                              '${index + 1}. ${order.data[index].data.name}',
+                              style: TextStyle(fontSize: 12.toFont,fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: 16.toHeight,
+                            ),
+                            Expanded(
+                              child: Text(order.data[index].data.price + " ₼",
+                                  style: TextStyle(fontSize: 12.toFont)),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 4.toHeight,
+                        ),
+                        Container(
+                          child: Text(
+                            order.data[index].data.information,
+                            style: TextStyle(fontSize: 12.toFont),
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          width: SizeConfig().screenWidth / 3,
+                        )
+                      ],
+                    );
+                  },
+                  itemCount: order.data.length,
                 ),
                 SizedBox(
                   height: 4.toHeight,
                 ),
-                Text(order.dt,
+                Container(
+                  child: Text(
+                    order.id,
                     style: TextStyle(
-                      color: ThemeColor().greyColor,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
                       fontSize: 14.toFont,
-                    ))
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
+                  width: SizeConfig().screenWidth,
+                )
               ],
             )),
         Positioned(
             right: 0,
             top: 0,
             child: CircleAvatar(
+              radius: 14.toFont,
               child: Icon(
                 Icons.done,
                 color: Colors.black,

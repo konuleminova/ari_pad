@@ -42,8 +42,8 @@ class OrderListView extends StatelessWidget {
                     child: Container(
                       height: SizeConfig().screenHeight,
                       width: SizeConfig().screenWidth,
-                      margin: EdgeInsets.all(30),
-                      padding: EdgeInsets.all(24),
+                      margin: EdgeInsets.only(left: 20,top: 20,bottom: 20),
+                      padding: EdgeInsets.all(20),
                       color: Color(0xFF3F3F3F),
                       child: ListView.builder(
                           shrinkWrap: true,
@@ -56,7 +56,6 @@ class OrderListView extends StatelessWidget {
                                 height: 140.toHeight,
                                 width: 140.toWidth,
                                 color: Colors.black,
-                                padding: EdgeInsets.all(16),
                               ),
                               onDragStarted: () {
                                 onDragStartCallback(orderListResponse.waitingOrders[index].id);
@@ -78,8 +77,8 @@ class OrderListView extends StatelessWidget {
                     child: Container(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width / 2,
-                        margin: EdgeInsets.all(30),
-                        padding: EdgeInsets.all(24),
+                        margin: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(20),
                         child: DragTarget<dynamic>(
                           builder: (BuildContext context,
                               List<dynamic> candidateData,
@@ -99,7 +98,7 @@ class OrderListView extends StatelessWidget {
                                               order: orderListResponse
                                                   .finishedOrders[index],
                                             ),
-                                            height: 140.toHeight,
+                                          //  height: 140.toHeight,
                                           );
                                         },
                                         separatorBuilder:
