@@ -58,7 +58,7 @@ class RightDragItem extends StatelessWidget {
                           child: Text(
                             order.data[index].data.information,
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.4),
+                                color: Colors.white.withOpacity(0.7),
                                 fontSize: 12.toFont),
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
