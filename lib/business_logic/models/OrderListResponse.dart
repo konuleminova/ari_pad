@@ -9,7 +9,7 @@ class OrderListResponse extends RestourantResponse {
     restid = json['restid'];
     name = json['name'];
     coords = json['coords'];
-    waitingOrders = listOrderFromJson(json['finished_orders']);
+    waitingOrders = listOrderFromJson(json['waiting_orders']);
     finishedOrders = listOrderFromJson(json['finished_orders']);
   }
 }

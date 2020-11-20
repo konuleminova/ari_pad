@@ -24,7 +24,6 @@ ApiResponse<OrderListResponse> useOrderList(UniqueKey key) {
 
 ApiResponse<OrderListResponse> useChangeStatus(String id, UniqueKey key) {
   final ApiConfig apiConfig = useApiConfig();
-  print('CHNAGE STATUS ');
   final DioConfig dioConfig = useMemoized(
           () => DioConfig<OrderListResponse>(
           path:
