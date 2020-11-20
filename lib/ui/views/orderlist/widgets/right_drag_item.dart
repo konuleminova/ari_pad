@@ -11,6 +11,8 @@ class RightDragItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int datTime = (DateTime.now().millisecondsSinceEpoch -
+        DateTime.parse(order.dt).millisecondsSinceEpoch);
     // TODO: implement build
     return Stack(
       children: <Widget>[
@@ -33,7 +35,7 @@ class RightDragItem extends StatelessWidget {
                   height: 8.toHeight,
                 ),
                 Text(
-                  order.dt,
+                  DateTime.parse(order.dt).toString(),
                   style: TextStyle(
                     color: ThemeColor().yellowColor,
                     fontSize: 14.toFont,
