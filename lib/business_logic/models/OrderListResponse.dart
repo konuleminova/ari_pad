@@ -9,7 +9,7 @@ class OrderListResponse extends RestourantResponse {
     restid = json['restid'];
     name = json['name'];
     coords = json['coords'];
-    waitingOrders = listOrderFromJson(json['finished_orders']);
+    waitingOrders = listOrderFromJson(json['waiting_orders']);
     finishedOrders = listOrderFromJson(json['finished_orders']);
   }
 }
@@ -25,7 +25,7 @@ class Order {
   Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     restid = json['restid'];
-    data = json['data'];
+   // data = json['data'];
     dt = json['dt'];
     md5key = json['md5key'];
     finished = json['finished'];
