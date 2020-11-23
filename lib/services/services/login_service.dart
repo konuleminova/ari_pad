@@ -8,18 +8,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 ApiResponse<RestourantResponse> useLogin(String login, String password) {
-  if(login!=null&&password!=null) {
-    final ApiConfig apiConfig = useApiConfig();
-    final DioConfig dioConfig = useMemoized(
-            () =>
-            DioConfig<RestourantResponse>(
-              path: apiConfig.LOGIN(login, password),
-              transformResponse: (Response response) =>
-                  RestourantResponse.fromJson(response.data),
-            ),
-        [login, password]);
+  final ApiConfig apiConfig = useApiConfig();
+  final DioConfig dioConfig = useMemoized(() {
+    if (login.isEmpty && password.isEmpty) return null;
 
-    ApiResponse<RestourantResponse> apiResponse = useDioRequest(dioConfig);
-    return apiResponse;
-  } else return ApiResponse.initial();
+    return DioConfig<RestourantResponse>(
+      path: apiConfig.LOGIN(login, password),
+      transformResponse: (Response response) =>
+          RestourantResponse.fromJson(response.data),
+    );
+  }, [login, password]);
+
+  ApiResponse<RestourantResponse> apiResponse = useDioRequest(dioConfig);
+  return apiResponse;
 }

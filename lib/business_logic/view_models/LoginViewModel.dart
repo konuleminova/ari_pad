@@ -14,10 +14,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 class LoginViewModel extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    final loginController = useTextEditingController();
-    final passController = useTextEditingController();
-    final ValueNotifier<String> login = useState<String>();
-    final ValueNotifier<String> password = useState<String>();
+    final loginController = useTextEditingController(text: '');
+    final passController = useTextEditingController(text: '');
+    final ValueNotifier<String> login = useState<String>('');
+    final ValueNotifier<String> password = useState<String>('');
 
     final loginCallBack = useCallback(() {
       if (loginController.text != null &&
