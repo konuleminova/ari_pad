@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
+import 'package:ari_pad/ui/views/orderlist/widgets/timer_widget.dart';
 import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +71,7 @@ class RightDragItem extends StatelessWidget {
                   },
                   itemCount: order.data.length,
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                 ),
                 SizedBox(
                   height: 8.toHeight,
@@ -75,20 +79,19 @@ class RightDragItem extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
+                    TimerText(
+                        dateText: order.dt,
+                        style: TextStyle(
+                          color: ThemeColor().yellowColor,
+                          fontSize: 14.toFont,
+                          fontWeight: FontWeight.w500
+                        )),
                     Text(
-                      DateTime.parse(order.dt).toString(),
+                      order.id ?? '',
                       style: TextStyle(
-                        color: ThemeColor().yellowColor,
-                        fontSize: 14.toFont,
-                      ),
-                    ),
-                    Text(
-                     order.id??'',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.toFont,
-                        fontWeight: FontWeight.w600
-                      ),
+                          color: Colors.white,
+                          fontSize: 14.toFont,
+                          fontWeight: FontWeight.w600),
                     )
                   ],
                 )
