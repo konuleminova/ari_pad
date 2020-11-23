@@ -4,7 +4,7 @@ import 'package:ari_pad/services/api_helper/api_response.dart';
 import 'package:ari_pad/services/api_helper/dio_config.dart';
 import 'package:ari_pad/services/hooks/useApiConfig.dart';
 import 'package:ari_pad/services/hooks/useDioRequest.dart';
-import 'package:ari_pad/utils/sharedpref/prefence_util.dart';
+import 'package:ari_pad/utils/sharedpref/sp_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -13,7 +13,7 @@ ApiResponse<OrderListResponse> useOrderList(UniqueKey key) {
   final ApiConfig apiConfig = useApiConfig();
   final DioConfig dioConfig = useMemoized(
       () => DioConfig<OrderListResponse>(
-          path: apiConfig.ORDER_LIST(PreferenceUtils.getString('token')),
+          path: apiConfig.ORDER_LIST(SpUtil.getString('token')),
           transformResponse: (Response response) =>
               OrderListResponse.fromJson(response.data)),
       [key]);
@@ -29,7 +29,7 @@ ApiResponse<OrderListResponse> useChangeStatus(String id, UniqueKey key) {
       return null;
     else
       return DioConfig<OrderListResponse>(
-          path: apiConfig.CHANGE_STATUS(PreferenceUtils.getString('token'), id),
+          path: apiConfig.CHANGE_STATUS(SpUtil.getString('token'), id),
           transformResponse: (Response response) =>
               OrderListResponse.fromJson(response.data));
   }, [key]);

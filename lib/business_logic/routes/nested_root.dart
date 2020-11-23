@@ -1,13 +1,14 @@
-import 'package:ari_pad/ui/main.dart';
-import 'package:flutter/material.dart';
 
+
+import 'package:flutter/material.dart';
+ final GlobalKey<NavigatorState> navigationKey=GlobalKey<NavigatorState>();
 class NestedNavigator extends StatelessWidget {
-  final GlobalKey<NavigatorState> navigationKey;
+
   final String initialRoute;
   final Map<String, WidgetBuilder> routes;
 
   NestedNavigator({
-    @required this.navigationKey,
+  //  @required this.navigationKey,
     @required this.initialRoute,
     @required this.routes,
   });

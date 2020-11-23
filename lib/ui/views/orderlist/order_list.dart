@@ -2,7 +2,7 @@ import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/left_drag_item.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/right_drag_item.dart';
-import 'package:ari_pad/utils/sharedpref/prefence_util.dart';
+import 'package:ari_pad/utils/sharedpref/sp_util.dart';
 import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +153,7 @@ class OrderListView extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(
-                        PreferenceUtils.getString('name surname') ??
+                       SpUtil.getString('name surname') ??
                             "Name Surname",
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
@@ -173,7 +173,7 @@ class OrderListView extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        PreferenceUtils.clearKey('token');
+                        SpUtil.remove('token');
                         pushReplaceRouteWithName('/');
                       },
                     )
