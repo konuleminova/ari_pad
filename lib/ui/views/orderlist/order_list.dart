@@ -42,7 +42,7 @@ class OrderListView extends StatelessWidget {
                     child: Container(
                       height: SizeConfig().screenHeight,
                       width: SizeConfig().screenWidth,
-                      margin: EdgeInsets.only(left: 20,top: 20,bottom: 20),
+                      margin: EdgeInsets.only(left: 20, top: 20, bottom: 20),
                       padding: EdgeInsets.all(20),
                       color: Color(0xFF3F3F3F),
                       child: ListView.builder(
@@ -52,13 +52,19 @@ class OrderListView extends StatelessWidget {
                           itemBuilder: (BuildContext context, int index) {
                             return Draggable(
                               affinity: Axis.horizontal,
-                              feedback: Container(
-                                height: 140.toHeight,
-                                width: 140.toWidth,
-                                color: Colors.black,
-                              ),
+                              feedback: !acceptTarget[
+                                      orderListResponse.waitingOrders[index].id]
+                                  ? Container(
+                                      child: RightDragItem(
+                                        order: orderListResponse
+                                            .waitingOrders[index],
+                                      ),
+                                      width: SizeConfig().screenWidth / 2.24,
+                                    )
+                                  : Container(),
                               onDragStarted: () {
-                                onDragStartCallback(orderListResponse.waitingOrders[index].id);
+                                onDragStartCallback(
+                                    orderListResponse.waitingOrders[index].id);
                               },
                               child: !acceptTarget[
                                       orderListResponse.waitingOrders[index].id]
@@ -98,7 +104,7 @@ class OrderListView extends StatelessWidget {
                                               order: orderListResponse
                                                   .finishedOrders[index],
                                             ),
-                                          //  height: 140.toHeight,
+                                            //  height: 140.toHeight,
                                           );
                                         },
                                         separatorBuilder:
@@ -153,8 +159,7 @@ class OrderListView extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       child: Text(
-                       SpUtil.getString('name surname') ??
-                            "Name Surname",
+                        SpUtil.getString('name surname') ?? "Name Surname",
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
                       // width: 44.toWidth,
