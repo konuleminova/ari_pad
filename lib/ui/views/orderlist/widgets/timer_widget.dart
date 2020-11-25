@@ -25,7 +25,7 @@ class TimerText extends HookWidget {
         Duration duration = Duration(milliseconds: difference);
         if (sDuration != null)
           sDuration.value =
-              "${duration.inDays} days - ${duration.inHours.remainder(60)}:${duration.inMinutes.remainder(60)}:${(duration.inSeconds.remainder(60))}";
+              "${duration.inDays > 0 ? '${duration.inDays} days -' : ''} ${duration.inHours.remainder(60)}:${duration.inMinutes.remainder(60)}:${(duration.inSeconds.remainder(60))}";
       });
       return () {
         timer.cancel();
