@@ -53,12 +53,14 @@ class LeftDragItem extends StatelessWidget {
                         Container(
                           child: Text(
                             order.data[index].data.information,
-                            style: TextStyle(fontSize: 12.toFont),
+                            style: TextStyle(fontSize: 10.toFont),
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
                           ),
                           width: SizeConfig().screenWidth / 3,
-                        )
+                        ) ,SizedBox(
+                          height: 4.toHeight,
+                        ),
                       ],
                     );
                   },

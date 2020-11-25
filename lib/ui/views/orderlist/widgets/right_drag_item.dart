@@ -36,7 +36,7 @@ class RightDragItem extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Text(
-                              order.data[index].data.name,
+                              '${index + 1}. ${order.data[index].data.name}',
                               style: TextStyle(
                                   color: Colors.white, fontSize: 12.toFont),
                             ),
@@ -59,13 +59,15 @@ class RightDragItem extends StatelessWidget {
                             order.data[index].data.information,
                             style: TextStyle(
                                 color: Colors.white.withOpacity(0.7),
-                                fontSize: 12.toFont),
+                                fontSize: 10.toFont),
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
                           ),
                           width: SizeConfig().screenWidth / 3,
                           alignment: Alignment.topLeft,
-                        )
+                        ), SizedBox(
+                          height: 4.toHeight,
+                        ),
                       ],
                     );
                   },
