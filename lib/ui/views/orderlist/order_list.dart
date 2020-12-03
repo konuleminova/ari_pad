@@ -139,7 +139,11 @@ class OrderListView extends StatelessWidget {
               top: MediaQuery.of(context).size.height - 100,
               left: 0,
               right: 0,
-              child: Container(
+              child: InkWell(
+                onTap: (){
+                  onRefreshDataCallBack();
+                },
+                  child: Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: 44,
                 ),
@@ -184,7 +188,7 @@ class OrderListView extends StatelessWidget {
                     )
                   ],
                 ),
-              ),
+              )),
             )
           ],
         ));

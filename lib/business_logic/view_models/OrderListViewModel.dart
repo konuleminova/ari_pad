@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/services/api_helper/api_response.dart';
@@ -14,6 +16,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:ari_pad/utils/size_config.dart';
 
 class OrderListViewModel extends HookWidget {
+  Timer timer;
+
   @override
   Widget build(BuildContext context) {
     final ValueNotifier<UniqueKey> keyRefresh1 = useState();
@@ -30,6 +34,15 @@ class OrderListViewModel extends HookWidget {
     //Use fetch Order list
     ApiResponse<OrderListResponse> apiResponse =
         useOrderList(keyRefresh1.value);
+
+    useEffect(() {
+      timer = Timer.periodic(Duration(minutes: 1), (timer) {
+        keyRefresh1.value = new UniqueKey();
+      });
+      return () {
+        timer.cancel();
+      };
+    }, []);
 
     useMemoized(() {
       if (apiResponse.status == Status.Error) {
@@ -81,7 +94,7 @@ class OrderListViewModel extends HookWidget {
               onRefreshDataCallBack: onRefreshDataCallBack)
           : Container(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Center(
@@ -93,7 +106,9 @@ class OrderListViewModel extends HookWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                SizedBox(height: 16.toHeight,),
+                SizedBox(
+                  height: 16.toHeight,
+                ),
                 InkWell(
                   child: Container(
                     width: 44.toWidth,

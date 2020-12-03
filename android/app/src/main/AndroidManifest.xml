@@ -7,9 +7,8 @@
          FlutterApplication and put your custom class here. -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:name="io.flutter.app.FlutterApplication"
-        android:label="ari_pad"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Arı Restourant"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

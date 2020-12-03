@@ -18,8 +18,10 @@ class LoginViewModel extends HookWidget {
     final passController = useTextEditingController(text: '');
     final ValueNotifier<String> login = useState<String>('');
     final ValueNotifier<String> password = useState<String>('');
+    var refreshKey=useState<UniqueKey>();
 
     final loginCallBack = useCallback(() {
+      refreshKey.value=new UniqueKey();
       if (loginController.text != null &&
           passController.text != null &&
           loginController.text.isNotEmpty &&
@@ -30,7 +32,7 @@ class LoginViewModel extends HookWidget {
     }, [login.value, password.value]);
 
     ApiResponse<RestourantResponse> apiResponse =
-        useLogin(login?.value, password?.value);
+        useLogin(login?.value, password?.value,refreshKey.value);
 
     useSideEffect(() {
       if (apiResponse?.data?.token != null) {
