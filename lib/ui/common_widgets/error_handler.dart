@@ -1,3 +1,4 @@
+import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/services/api_helper/api_response.dart';
 import 'package:ari_pad/services/hooks/useSideEffect.dart';
 import 'package:ari_pad/utils/size_config.dart';
@@ -12,10 +13,9 @@ class CustomErrorHandler extends HookWidget {
   final List<AppException> errors;
   final Widget child;
   final Function onRefresh;
-  final isInitial;
 
   const CustomErrorHandler(
-      {this.statuses, this.child, this.errors, this.onRefresh, this.isInitial});
+      {this.statuses, this.child, this.errors, this.onRefresh,});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class CustomErrorHandler extends HookWidget {
         null;
     final ctx = useContext();
     useSideEffect(() {
-      if (hasError && !isInitial) {
+      if (hasError) {
         showDialog(
             context: ctx,
             builder: (BuildContext context) => ErrorDialog(
@@ -94,6 +94,10 @@ class ErrorDialog extends StatelessWidget {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
+                    if(errorMessage=='TOKEN not found'){
+                      pushRouteWithName('/');
+                    }
+
                   },
                 ),
                 width: SizeConfig().screenWidth,

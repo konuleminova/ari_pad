@@ -46,10 +46,6 @@ class LoginViewModel extends HookWidget {
     return CustomErrorHandler(
       statuses: [apiResponse.status],
       errors: [apiResponse.error],
-      isInitial: !(loginController.text != null &&
-          passController.text != null &&
-          loginController.text.isNotEmpty &&
-          passController.text.isNotEmpty),
       child: LoginView(
         loginController: loginController,
         passController: passController,
