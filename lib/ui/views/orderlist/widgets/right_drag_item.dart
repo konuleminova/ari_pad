@@ -245,7 +245,12 @@ class RightDragItem extends HookWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            TextField(style: TextStyle(color: Colors.black87)),
+                            TextField(
+                              style: TextStyle(color: Colors.black87),
+                              decoration:
+                                  InputDecoration(border: InputBorder.none),
+                              maxLines: 3,
+                            ),
                             SizedBox(
                               height: 16.toHeight,
                             ),
@@ -275,6 +280,7 @@ class RightDragItem extends HookWidget {
                               ),
                               onTap: () {
                                 isExpaned.value = false;
+                                keyRefresh.value=new UniqueKey();
                               },
                             )
                           ],
