@@ -9,11 +9,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-ApiResponse<OrderListResponse> useOrderList(UniqueKey key) {
+ApiResponse<OrderListResponse> useOrderList(UniqueKey key,
+    {String time, String id}) {
   final ApiConfig apiConfig = useApiConfig();
   final DioConfig dioConfig = useMemoized(
       () => DioConfig<OrderListResponse>(
-          path: apiConfig.ORDER_LIST(SpUtil.getString('token')),
+          path: apiConfig.ORDER_LIST(SpUtil.getString('token'), time, id),
           transformResponse: (Response response) =>
               OrderListResponse.fromJson(response.data)),
       [key]);

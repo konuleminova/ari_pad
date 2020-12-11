@@ -58,6 +58,7 @@ class OrderListView extends StatelessWidget {
                                       child: RightDragItem(
                                         order: orderListResponse
                                             .waitingOrders[index],
+                                        refresh: onRefreshDataCallBack,
                                       ),
                                       width: SizeConfig().screenWidth / 2.24,
                                     )
@@ -71,6 +72,7 @@ class OrderListView extends StatelessWidget {
                                   ? RightDragItem(
                                       order: orderListResponse
                                           .waitingOrders[index],
+                                refresh: onRefreshDataCallBack,
                                     )
                                   : Container(),
                               data: acceptTarget[orderListResponse

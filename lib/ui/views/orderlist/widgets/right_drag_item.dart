@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
+import 'package:ari_pad/services/api_helper/api_response.dart';
+import 'package:ari_pad/services/services/orderList_service.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/timer_widget.dart';
 import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,12 +12,28 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class RightDragItem extends HookWidget {
   Order order;
+  var refresh;
 
-  RightDragItem({this.order});
+  RightDragItem({this.order, this.refresh});
 
   @override
   Widget build(BuildContext context) {
     var isExpaned = useState<bool>(false);
+    var id = useState<String>();
+    var time = useState<String>();
+    var keyRefresh = useState<UniqueKey>();
+    ApiResponse<OrderListResponse> apiResponse =
+        useOrderList(keyRefresh.value, time: time.value, id: id.value);
+
+    useEffect(() {
+      Future.delayed(const Duration(milliseconds: 400), () {
+        if (keyRefresh.value != null) {
+          refresh();
+        }
+      });
+
+      return () {};
+    }, [keyRefresh.value]);
     // TODO: implement build
     return Stack(
       children: <Widget>[
@@ -150,18 +168,27 @@ class RightDragItem extends HookWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder:
                                       (BuildContext context, int index) {
-                                    return CircleAvatar(
-                                      radius: 30,
-                                      backgroundColor: order.approved == '0'
-                                          ? Colors.blue
-                                          : order.time ==
-                                                  ((index + 1) * 5).toString()
-                                              ? Colors.blue
-                                              : Colors.blue.withOpacity(0.3),
-                                      child: Text(
-                                        ((index + 1) * 5).toString(),
-                                        style: TextStyle(color: Colors.white),
+                                    return InkWell(
+                                      child: CircleAvatar(
+                                        radius: 30,
+                                        backgroundColor: order.approved == '0'
+                                            ? Colors.blue
+                                            : order.time ==
+                                                    ((index + 1) * 5).toString()
+                                                ? Colors.blue
+                                                : Colors.blue.withOpacity(0.3),
+                                        child: Text(
+                                          ((index + 1) * 5).toString(),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
+                                      onTap: () {
+                                        id.value = order.id;
+                                        time.value =
+                                            ((index + 1) * 5).toString();
+                                        keyRefresh.value = new UniqueKey();
+                                        // refresh();
+                                      },
                                     );
                                   }),
                             ),
@@ -247,7 +274,7 @@ class RightDragItem extends HookWidget {
                                 ],
                               ),
                               onTap: () {
-                                isExpaned.value=false;
+                                isExpaned.value = false;
                               },
                             )
                           ],
