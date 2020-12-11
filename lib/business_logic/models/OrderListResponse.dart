@@ -21,6 +21,11 @@ class Order {
   String dt;
   String md5key;
   String finished;
+  String approved;
+  String time;
+  String ordersum;
+  String payedsum;
+  String finished_time;
 
   Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -29,6 +34,11 @@ class Order {
     dt = json['dt'];
     md5key = json['md5key'];
     finished = json['finished'];
+    approved = json['approved'];
+    time = json['time'];
+    ordersum = json['ordersum'];
+    payedsum = json['payedsum'];
+    finished_time = json['finished_time'];
   }
 }
 
@@ -55,7 +65,7 @@ class Data {
 }
 
 class Food {
-  int count;
+  String count;
   Data data;
 
   Food.fromJson(Map<String, dynamic> json) {

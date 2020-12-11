@@ -21,7 +21,14 @@ class RightDragItem extends StatelessWidget {
             margin: EdgeInsets.only(
                 bottom: 8.toHeight, right: 4.toWidth, top: 16.toHeight),
             width: MediaQuery.of(context).size.width,
-            color: Colors.black,
+            decoration: BoxDecoration(
+                color: Colors.black,
+                border: Border(
+                    bottom: BorderSide(
+                        color: order.approved == '0'
+                            ? Colors.lightBlue
+                            : ThemeColor().yellowColor,
+                        width: 2))),
             padding: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +72,8 @@ class RightDragItem extends StatelessWidget {
                           ),
                           width: SizeConfig().screenWidth / 3,
                           alignment: Alignment.topLeft,
-                        ), SizedBox(
+                        ),
+                        SizedBox(
                           height: 4.toHeight,
                         ),
                       ],
@@ -84,10 +92,9 @@ class RightDragItem extends StatelessWidget {
                     TimerText(
                         dateText: order.dt,
                         style: TextStyle(
-                          color: ThemeColor().yellowColor,
-                          fontSize: 14.toFont,
-                          fontWeight: FontWeight.w500
-                        )),
+                            color: ThemeColor().yellowColor,
+                            fontSize: 14.toFont,
+                            fontWeight: FontWeight.w500)),
                     Text(
                       order.id ?? '',
                       style: TextStyle(
