@@ -53,86 +53,84 @@ class RightDragItem extends HookWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: <Widget>[
-                                  Text(
-                                    '${index + 1}. ${order.data[index].data.name}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12.toFont),
-                                  ),
-                                  SizedBox(
-                                    width: 16.toHeight,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                        order.data[index].data.price + " ₼",
-                                        style: TextStyle(
-                                            color: Colors.green,
-                                            fontSize: 12.toFont)),
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                height: 4.toHeight,
-                              ),
-                              Container(
-                                child: Text(
-                                  order.data[index].data.information,
-                                  style: TextStyle(
-                                      color: Colors.white.withOpacity(0.7),
-                                      fontSize: 10.toFont),
-                                  textAlign: TextAlign.start,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                width: SizeConfig().screenWidth / 3,
-                                alignment: Alignment.topLeft,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          child: Column(
                             children: [
-                              TimerText(
-                                  dateText: order.dt,
-                                  style: TextStyle(
-                                      color: ThemeColor().yellowColor,
-                                      fontSize: 12.toFont,
-                                      fontWeight: FontWeight.w500)),
-                              order.approved == '1'
-                                  ? Text(order.finished_time,
-                                      style: TextStyle(
-                                          color: Colors.green,
-                                          fontSize: 12.toFont))
-                                  : SizedBox(),
-//                              order.approved=='1'? Text(
-//                                  order.address,
-//                                  style: TextStyle(
-//                                      color: Colors.green,
-//                                      fontSize: 12.toFont)):SizedBox(),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: <Widget>[
+                                        Text(
+                                          '${order.data[index].count}. ${order.data[index].data.name}',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12.toFont),
+                                        ),
+//                                  )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 4.toHeight,
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        order.data[index].data.information,
+                                        style: TextStyle(
+                                            color:
+                                                Colors.white.withOpacity(0.7),
+                                            fontSize: 10.toFont),
+                                        textAlign: TextAlign.start,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      width: SizeConfig().screenWidth / 3,
+                                      alignment: Alignment.topLeft,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                  itemCount: order.data.length,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                          );
+                        },
+                        itemCount: order.data.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          TimerText(
+                              dateText: order.dt,
+                              style: TextStyle(
+                                  color: ThemeColor().yellowColor,
+                                  fontSize: 12.toFont,
+                                  fontWeight: FontWeight.w500)),
+                          order.approved == '1'
+                              ? Text(order.finished_time,
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 12.toFont))
+                              : SizedBox(),
+                          order.approved == '1'
+                              ? Text(order.username,
+                                  style: TextStyle(
+                                      color: Colors.green, fontSize: 12.toFont))
+                              : SizedBox(),
+                        ],
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 2.toHeight,
@@ -150,7 +148,7 @@ class RightDragItem extends HookWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 24.toHeight,
+                  height: 16.toHeight,
                 ),
                 !isExpaned.value
                     ? Container(
@@ -160,7 +158,7 @@ class RightDragItem extends HookWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 3,
+                              flex: 4,
                               child: ListView.builder(
                                   padding: EdgeInsets.all(0),
                                   shrinkWrap: true,
@@ -193,7 +191,7 @@ class RightDragItem extends HookWidget {
                                   }),
                             ),
                             SizedBox(
-                              width: 16.toWidth,
+                              width: 4.toWidth,
                             ),
                             Expanded(
                                 child: InkWell(
