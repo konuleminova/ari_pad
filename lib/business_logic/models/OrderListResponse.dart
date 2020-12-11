@@ -69,7 +69,7 @@ class Data {
 }
 
 class Food {
-  String count;
+  var  count;
   Data data;
 
   Food.fromJson(Map<String, dynamic> json) {
