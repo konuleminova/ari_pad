@@ -35,47 +35,60 @@ class RightDragItem extends StatelessWidget {
               children: <Widget>[
                 ListView.builder(
                   itemBuilder: (BuildContext context, int index) {
-                    return Column(
+                    return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Text(
-                              '${index + 1}. ${order.data[index].data.name}',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 12.toFont),
-                            ),
-                            SizedBox(
-                              width: 16.toHeight,
-                            ),
-                            Expanded(
-                              child: Text(order.data[index].data.price + " ₼",
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  Text(
+                                    '${index + 1}. ${order.data[index].data.name}',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12.toFont),
+                                  ),
+                                  SizedBox(
+                                    width: 16.toHeight,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                        order.data[index].data.price + " ₼",
+                                        style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 12.toFont)),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 4.toHeight,
+                              ),
+                              Container(
+                                child: Text(
+                                  order.data[index].data.information,
                                   style: TextStyle(
-                                      color: Colors.green,
-                                      fontSize: 12.toFont)),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 4.toHeight,
-                        ),
-                        Container(
-                          child: Text(
-                            order.data[index].data.information,
-                            style: TextStyle(
-                                color: Colors.white.withOpacity(0.7),
-                                fontSize: 10.toFont),
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 10.toFont),
+                                  textAlign: TextAlign.start,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                width: SizeConfig().screenWidth / 3,
+                                alignment: Alignment.topLeft,
+                              ),
+                            ],
                           ),
-                          width: SizeConfig().screenWidth / 3,
-                          alignment: Alignment.topLeft,
                         ),
-                        SizedBox(
-                          height: 4.toHeight,
-                        ),
+                        TimerText(
+                            dateText: order.dt,
+                            style: TextStyle(
+                                color: ThemeColor().yellowColor,
+                                fontSize: 12.toFont,
+                                fontWeight: FontWeight.w500)),
                       ],
                     );
                   },
@@ -84,26 +97,81 @@ class RightDragItem extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                 ),
                 SizedBox(
-                  height: 8.toHeight,
+                  height: 2.toHeight,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    TimerText(
-                        dateText: order.dt,
-                        style: TextStyle(
-                            color: ThemeColor().yellowColor,
-                            fontSize: 14.toFont,
-                            fontWeight: FontWeight.w500)),
                     Text(
                       order.id ?? '',
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14.toFont,
+                          fontSize: 15.toFont,
                           fontWeight: FontWeight.w600),
                     )
                   ],
-                )
+                ),
+                SizedBox(
+                  height: 24.toHeight,
+                ),
+               order.approved=='0'? Container(
+                    height: 44.toHeight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: ListView.builder(
+                              padding: EdgeInsets.all(0),
+                              shrinkWrap: true,
+                              itemCount: 6,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                return CircleAvatar(
+                                  radius: 30,
+                                  backgroundColor: Colors.blue,
+                                  child: Text(
+                                    ((index + 1) * 5).toString(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                );
+                              }),
+                        ),
+                        SizedBox(
+                          width: 16.toWidth,
+                        ),
+                        Expanded(
+                            child: Container(
+                          width: 100.toWidth,
+                          height: 44.toHeight,
+                          // padding: EdgeInsets.all(3),
+                          color: Colors.white,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.clear,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: 4.toWidth,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Imtina',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4.toWidth,
+                              )
+                            ],
+                          ),
+                        ))
+                      ],
+                    )):SizedBox()
               ],
             )),
         Positioned(
