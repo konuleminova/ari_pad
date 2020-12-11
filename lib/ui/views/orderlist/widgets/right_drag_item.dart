@@ -6,14 +6,16 @@ import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ari_pad/utils/size_config.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class RightDragItem extends StatelessWidget {
+class RightDragItem extends HookWidget {
   Order order;
 
   RightDragItem({this.order});
 
   @override
   Widget build(BuildContext context) {
+    var isExpaned = useState<bool>(false);
     // TODO: implement build
     return Stack(
       children: <Widget>[
@@ -83,12 +85,30 @@ class RightDragItem extends StatelessWidget {
                             ],
                           ),
                         ),
-                        TimerText(
-                            dateText: order.dt,
-                            style: TextStyle(
-                                color: ThemeColor().yellowColor,
-                                fontSize: 12.toFont,
-                                fontWeight: FontWeight.w500)),
+                        Container(
+                          child: Column(
+                            children: [
+                              TimerText(
+                                  dateText: order.dt,
+                                  style: TextStyle(
+                                      color: ThemeColor().yellowColor,
+                                      fontSize: 12.toFont,
+                                      fontWeight: FontWeight.w500)),
+                              order.approved == '1'
+                                  ? Text(order.finished_time,
+                                      style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 12.toFont))
+                                  : SizedBox(),
+//                              order.approved=='1'? Text(
+//                                  order.address,
+//                                  style: TextStyle(
+//                                      color: Colors.green,
+//                                      fontSize: 12.toFont)):SizedBox(),
+                            ],
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                          ),
+                        )
                       ],
                     );
                   },
@@ -114,69 +134,117 @@ class RightDragItem extends StatelessWidget {
                 SizedBox(
                   height: 24.toHeight,
                 ),
-                Container(
-                    height: 44.toHeight,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: ListView.builder(
-                              padding: EdgeInsets.all(0),
-                              shrinkWrap: true,
-                              itemCount: 6,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (BuildContext context, int index) {
-                                return CircleAvatar(
-                                  radius: 30,
-                                  backgroundColor: order.approved == '0'
-                                      ? Colors.blue
-                                      : order.time ==
-                                              ((index + 1) * 5).toString()
+                !isExpaned.value
+                    ? Container(
+                        height: 44.toHeight,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: ListView.builder(
+                                  padding: EdgeInsets.all(0),
+                                  shrinkWrap: true,
+                                  itemCount: 6,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: order.approved == '0'
                                           ? Colors.blue
-                                          : Colors.blue.withOpacity(0.3),
-                                  child: Text(
-                                    ((index + 1) * 5).toString(),
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                );
-                              }),
-                        ),
-                        SizedBox(
-                          width: 16.toWidth,
-                        ),
-                        Expanded(
-                            child: Container(
-                          width: 100.toWidth,
-                          height: 44.toHeight,
-                          // padding: EdgeInsets.all(3),
-                          color: Colors.white,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Icon(
-                                Icons.clear,
-                                color: Colors.red,
-                              ),
-                              SizedBox(
-                                width: 4.toWidth,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  'Imtina',
-                                  style: TextStyle(color: Colors.red),
+                                          : order.time ==
+                                                  ((index + 1) * 5).toString()
+                                              ? Colors.blue
+                                              : Colors.blue.withOpacity(0.3),
+                                      child: Text(
+                                        ((index + 1) * 5).toString(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                            SizedBox(
+                              width: 16.toWidth,
+                            ),
+                            Expanded(
+                                child: InkWell(
+                              child: Container(
+                                width: 100.toWidth,
+                                height: 44.toHeight,
+                                // padding: EdgeInsets.all(3),
+                                color: Colors.white,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(
+                                      Icons.clear,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: 4.toWidth,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        'Imtina',
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 4.toWidth,
+                                    )
+                                  ],
                                 ),
                               ),
-                              SizedBox(
-                                width: 4.toWidth,
-                              )
-                            ],
-                          ),
+                              onTap: () {
+                                isExpaned.value = true;
+                              },
+                            ))
+                          ],
                         ))
-                      ],
-                    ))
+                    : Container(
+                        color: Colors.white,
+                        padding: EdgeInsets.only(left: 8.toWidth,right: 8.toWidth,bottom: 8.toWidth),
+                        alignment: Alignment.bottomRight,
+                        //   height: 54.toHeight,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            TextField(style: TextStyle(color: Colors.black87)),
+                            SizedBox(
+                              height: 16.toHeight,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.clear,
+                                  color: Colors.red,
+                                ),
+                                SizedBox(
+                                  width: 4.toWidth,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Imtina',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 4.toWidth,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
               ],
             )),
         Positioned(

@@ -26,6 +26,7 @@ class Order {
   String ordersum;
   String payedsum;
   String finished_time;
+  String address;
 
   Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -39,6 +40,7 @@ class Order {
     ordersum = json['ordersum'];
     payedsum = json['payedsum'];
     finished_time = json['finished_time'];
+    address = json['address'];
   }
 }
 
