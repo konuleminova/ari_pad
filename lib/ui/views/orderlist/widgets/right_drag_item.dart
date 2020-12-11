@@ -234,6 +234,7 @@ class RightDragItem extends HookWidget {
                         ))
                     : Container(
                         color: Colors.white,
+                        width: SizeConfig().screenWidth,
                         padding: EdgeInsets.only(
                             left: 8.toWidth,
                             right: 8.toWidth,
@@ -249,38 +250,39 @@ class RightDragItem extends HookWidget {
                               style: TextStyle(color: Colors.black87),
                               decoration:
                                   InputDecoration(border: InputBorder.none),
-                              maxLines: 3,
+                              maxLines: 2,
                             ),
                             SizedBox(
                               height: 16.toHeight,
                             ),
                             InkWell(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.clear,
-                                    color: Colors.red,
-                                  ),
-                                  SizedBox(
-                                    width: 4.toWidth,
-                                  ),
-                                  Expanded(
-                                    child: Text(
+                              child: Container(
+                                alignment: Alignment.bottomRight,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.clear,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(
+                                      width: 4.toWidth,
+                                    ),
+                                    Text(
                                       'Imtina',
                                       style: TextStyle(color: Colors.red),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 4.toWidth,
-                                  )
-                                ],
+                                    SizedBox(
+                                      width: 4.toWidth,
+                                    )
+                                  ],
+                                ),
                               ),
                               onTap: () {
                                 isExpaned.value = false;
-                                keyRefresh.value=new UniqueKey();
+                                keyRefresh.value = new UniqueKey();
                               },
                             )
                           ],
