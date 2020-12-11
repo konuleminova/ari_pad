@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
@@ -9,6 +10,7 @@ import 'package:ari_pad/ui/common_widgets/error_handler.dart';
 import 'package:ari_pad/ui/views/orderlist/order_list.dart';
 import 'package:ari_pad/utils/sharedpref/sp_util.dart';
 import 'package:ari_pad/utils/theme_color.dart';
+import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -49,11 +51,21 @@ class OrderListViewModel extends HookWidget {
       } else if (apiResponse.status == Status.Done) {
         apiResponse.data.waitingOrders.forEach((element) {
           acceptTarget.value[element.id] = false;
+
         });
         apiResponse.data.finishedOrders.forEach((element) {
           acceptTarget.value[element.id] = false;
         });
       }
+      if (apiResponse.status == Status.Done) {
+        for(int i=0;i<apiResponse.data.waitingOrders.length;i++){
+          if(apiResponse.data.waitingOrders[i].approved=='0'){
+            AudioCache().play("songs/buzz.mp3");
+          }
+          break;
+        }
+      }
+
     }, [apiResponse]);
 
     //On drag Started Callback
