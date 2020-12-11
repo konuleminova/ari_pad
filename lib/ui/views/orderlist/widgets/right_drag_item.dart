@@ -114,7 +114,7 @@ class RightDragItem extends StatelessWidget {
                 SizedBox(
                   height: 24.toHeight,
                 ),
-               order.approved=='0'? Container(
+                Container(
                     height: 44.toHeight,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,7 +130,12 @@ class RightDragItem extends StatelessWidget {
                               itemBuilder: (BuildContext context, int index) {
                                 return CircleAvatar(
                                   radius: 30,
-                                  backgroundColor: Colors.blue,
+                                  backgroundColor: order.approved == '0'
+                                      ? Colors.blue
+                                      : order.time ==
+                                              ((index + 1) * 5).toString()
+                                          ? Colors.blue
+                                          : Colors.blue.withOpacity(0.3),
                                   child: Text(
                                     ((index + 1) * 5).toString(),
                                     style: TextStyle(color: Colors.white),
@@ -171,7 +176,7 @@ class RightDragItem extends StatelessWidget {
                           ),
                         ))
                       ],
-                    )):SizedBox()
+                    ))
               ],
             )),
         Positioned(
