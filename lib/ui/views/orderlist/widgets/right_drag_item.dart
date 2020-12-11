@@ -207,7 +207,10 @@ class RightDragItem extends HookWidget {
                         ))
                     : Container(
                         color: Colors.white,
-                        padding: EdgeInsets.only(left: 8.toWidth,right: 8.toWidth,bottom: 8.toWidth),
+                        padding: EdgeInsets.only(
+                            left: 8.toWidth,
+                            right: 8.toWidth,
+                            bottom: 8.toWidth),
                         alignment: Alignment.bottomRight,
                         //   height: 54.toHeight,
                         child: Column(
@@ -219,29 +222,34 @@ class RightDragItem extends HookWidget {
                             SizedBox(
                               height: 16.toHeight,
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.clear,
-                                  color: Colors.red,
-                                ),
-                                SizedBox(
-                                  width: 4.toWidth,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    'Imtina',
-                                    style: TextStyle(color: Colors.red),
+                            InkWell(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.clear,
+                                    color: Colors.red,
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 4.toWidth,
-                                )
-                              ],
-                            ),
+                                  SizedBox(
+                                    width: 4.toWidth,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      'Imtina',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 4.toWidth,
+                                  )
+                                ],
+                              ),
+                              onTap: () {
+                                isExpaned.value=false;
+                              },
+                            )
                           ],
                         ),
                       )
