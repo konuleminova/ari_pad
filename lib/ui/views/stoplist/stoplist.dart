@@ -57,7 +57,7 @@ class StopListView extends HookWidget {
                               ? Color(0xFFCD0000)
                               : Color(0xFF0052cd)),
                       child: Text(
-                        items[index].item_3 == '1' ? 'Turn off' : 'Turn on',
+                        items[index].item_3 == '0' ? 'Turn off' : 'Turn on',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
