@@ -2,39 +2,27 @@ import 'package:ari_pad/business_logic/routes/nested_root.dart';
 import 'package:ari_pad/business_logic/routes/route_names.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/utils/sharedpref/sp_util.dart';
-import 'package:ari_pad/utils/size_config.dart';
 import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ari_pad/utils/size_config.dart';
 
-class InitPage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _InitPage();
-  }
-}
-
-class _InitPage extends State<InitPage> {
-  String initial;
-
+class InitialView extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
     // TODO: implement build
     return Scaffold(
       backgroundColor: ThemeColor().greyColor,
       body: Stack(
         children: [
-          NestedNavigator(
-              initialRoute: '/' ,
-              routes: routeNames),
+          NestedNavigator(initialRoute: '/', routes: routeNames),
           Positioned(
             top: MediaQuery.of(context).size.height - 100,
             left: 0,
             right: 0,
             child: InkWell(
                 onTap: () {
-                //  onRefreshDataCallBack();
+                  //  onRefreshDataCallBack();
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(
@@ -151,19 +139,5 @@ class _InitPage extends State<InitPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    setInstance();
-  }
-
-  void setInstance() async {
-    await SpUtil.getInstance();
-    initial = await SpUtil.getString('token').isEmpty ? null : "/home";
-    if (initial != null) {
-      pushReplaceRouteWithName('/home');
-    }
   }
 }

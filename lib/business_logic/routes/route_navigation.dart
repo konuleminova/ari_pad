@@ -1,5 +1,5 @@
 import 'package:ari_pad/business_logic/routes/nested_root.dart';
-import 'package:ari_pad/ui/views/init.dart';
+import 'package:ari_pad/ui/views/spash.dart';
 
 void pushRouteWithName(String name, {RouteArguments arguments}) {
   navigationKey.currentState.pushNamed(name, arguments: arguments);
