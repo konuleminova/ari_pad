@@ -9,7 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class StopListView extends HookWidget {
   List<RestourantItem> items;
-  var  stopListOnOffCallBack;
+  var stopListOnOffCallBack;
 
   StopListView(this.items, this.stopListOnOffCallBack);
 
@@ -17,17 +17,19 @@ class StopListView extends HookWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      padding: EdgeInsets.all(16),
+      color: Colors.white,
+      margin: EdgeInsets.all(16),
       child: ListView.builder(
+        padding: EdgeInsets.all(0),
         itemBuilder: (BuildContext context, int index) {
           return Container(
             height: 54,
             padding: EdgeInsets.all(12),
             margin: EdgeInsets.all(0.7),
             color: items[index].item_3 == '1'
-                ? Colors.red.withOpacity(0.6)
+                ? Color(0xFFCD0000).withOpacity(0.3)
                 : index % 2 == 0
-                    ? Colors.grey
+                    ? ThemeColor().greyColor.withOpacity(0.6)
                     : ThemeColor().grey1,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,12 +50,12 @@ class StopListView extends HookWidget {
                     child: Container(
                       alignment: Alignment.center,
                       width: 120,
-                      height: 44,
+                      height: 54,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: items[index].item_3 == '1'
-                              ? Colors.red
-                              : Colors.blue),
+                              ? Color(0xFFCD0000)
+                              : Color(0xFF0052cd)),
                       child: Text(
                         items[index].item_3 == '1' ? 'Turn off' : 'Turn on',
                         style: TextStyle(color: Colors.white),
@@ -62,7 +64,7 @@ class StopListView extends HookWidget {
                   ),
                   onTap: () {
                     print('FID ${items[index].id}');
-                    stopListOnOffCallBack(items[index].id,index);
+                    stopListOnOffCallBack(items[index].id, index);
                   },
                 ))
               ],
