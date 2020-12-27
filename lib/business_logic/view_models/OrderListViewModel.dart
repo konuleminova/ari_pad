@@ -3,6 +3,7 @@ import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/services/api_helper/api_response.dart';
 import 'package:ari_pad/services/hooks/use_callback.dart';
+import 'package:ari_pad/services/services/onoff_service.dart';
 import 'package:ari_pad/services/services/orderList_service.dart';
 import 'package:ari_pad/ui/common_widgets/error_handler.dart';
 import 'package:ari_pad/ui/views/orderlist/order_list.dart';
@@ -20,8 +21,9 @@ class OrderListViewModel extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<UniqueKey> keyRefresh1 = useState();
-    final ValueNotifier<UniqueKey> keyRefresh2 = useState();
+    final ValueNotifier<UniqueKey> refreshKey = useState();
+    final ValueNotifier<UniqueKey> changeStatusKey = useState();
+    final ValueNotifier<UniqueKey> onOffKey = useState();
     final ValueNotifier<Map<String, bool>> acceptTarget =
         useState<Map<String, bool>>(Map<String, bool>());
     final ValueNotifier<String> id = useState();
@@ -29,15 +31,19 @@ class OrderListViewModel extends HookWidget {
         useState(ScrollController());
 
     //On Drag Accept CallBack
-    useChangeStatus(id?.value, keyRefresh2?.value);
+    useChangeStatus(id?.value, changeStatusKey?.value);
+
+    //On off Restourant Service
+    useOnOff(onOffKey.value);
 
     //Use fetch Order list
-    ApiResponse<OrderListResponse> apiResponse =
-        useOrderList(keyRefresh1.value);
+    ApiResponse<OrderListResponse> apiResponse = useOrderList(refreshKey.value);
+
+
 
     useEffect(() {
       timer = Timer.periodic(Duration(minutes: 44), (timer) {
-        keyRefresh1.value = new UniqueKey();
+        refreshKey.value = new UniqueKey();
       });
       return () {
         timer.cancel();
@@ -49,21 +55,19 @@ class OrderListViewModel extends HookWidget {
       } else if (apiResponse.status == Status.Done) {
         apiResponse.data.waitingOrders.forEach((element) {
           acceptTarget.value[element.id] = false;
-
         });
         apiResponse.data.finishedOrders.forEach((element) {
           acceptTarget.value[element.id] = false;
         });
       }
       if (apiResponse.status == Status.Done) {
-        for(int i=0;i<apiResponse.data.waitingOrders.length;i++){
-          if(apiResponse.data.waitingOrders[i].approved=='0'){
+        for (int i = 0; i < apiResponse.data.waitingOrders.length; i++) {
+          if (apiResponse.data.waitingOrders[i].approved == '0') {
             AudioCache().play("songs/buzz.mp3");
           }
           break;
         }
       }
-
     }, [apiResponse]);
 
     //On drag Started Callback
@@ -77,13 +81,20 @@ class OrderListViewModel extends HookWidget {
     }, [id.value]);
 
     final onDragAcceptCallBack = useCallback(() {
-      keyRefresh2.value = new UniqueKey();
-    }, [keyRefresh2.value]);
+      changeStatusKey.value = new UniqueKey();
+    }, [changeStatusKey.value]);
+    //On off restourant CallBack
 
-//On refresh Data Callback
+    //On refresh Data Callback
     final onRefreshDataCallBack = useCallback(() {
-      keyRefresh1.value = new UniqueKey();
-    }, [keyRefresh1.value]);
+      refreshKey.value = new UniqueKey();
+    }, [refreshKey.value]);
+
+    final onOFFRestourantCallBack = useCallback(() {
+      onOffKey.value = new UniqueKey();
+      refreshKey.value = new UniqueKey();
+    }, [onOffKey.value]);
+
     // TODO: implement build
     return CustomErrorHandler(
       statuses: [apiResponse.status],
@@ -95,6 +106,7 @@ class OrderListViewModel extends HookWidget {
               onDragStartCallback: onDragStartCallBack,
               scrollController: listScrollController.value,
               onDragAcceptCallBack: onDragAcceptCallBack,
+              onOFFRestourantCallBack: onOFFRestourantCallBack,
               onRefreshDataCallBack: onRefreshDataCallBack)
           : Container(
               child: Column(

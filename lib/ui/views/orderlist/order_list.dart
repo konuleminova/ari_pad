@@ -14,6 +14,7 @@ class OrderListView extends StatelessWidget {
   ScrollController scrollController;
   Function onDragAcceptCallBack;
   Function onRefreshDataCallBack;
+  Function onOFFRestourantCallBack;
 
   OrderListView(
       {this.orderListResponse,
@@ -21,7 +22,8 @@ class OrderListView extends StatelessWidget {
       this.onDragStartCallback,
       this.scrollController,
       this.onDragAcceptCallBack,
-      this.onRefreshDataCallBack});
+      this.onRefreshDataCallBack,
+      this.onOFFRestourantCallBack});
 
   final Map<String, bool> acceptTarget;
 
@@ -188,8 +190,7 @@ class OrderListView extends StatelessWidget {
                                 ),
                               ),
                               onTap: () {
-                                SpUtil.remove('token');
-                                pushReplaceRouteWithName('/');
+                                onOFFRestourantCallBack.call();
                               },
                             ),
                             SizedBox(
