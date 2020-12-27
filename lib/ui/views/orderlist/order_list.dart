@@ -184,7 +184,9 @@ class OrderListView extends StatelessWidget {
                                 width: 44.toWidth,
                                 height: 40.toHeight,
                                 alignment: Alignment.center,
-                                color: ThemeColor().greyColor.withOpacity(0.6),
+                                color: orderListResponse.onoff == '0'
+                                    ? ThemeColor().greyColor.withOpacity(0.6)
+                                    : Colors.black,
                                 child: Text(
                                   'ON',
                                   textAlign: TextAlign.center,

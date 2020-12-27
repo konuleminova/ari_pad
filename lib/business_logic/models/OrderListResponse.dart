@@ -3,6 +3,7 @@ import 'package:ari_pad/business_logic/models/RestourantResponse.dart';
 class OrderListResponse extends RestourantResponse {
   List<Order> waitingOrders;
   List<Order> finishedOrders;
+  String onoff;
 
   OrderListResponse.fromJson(Map<String, dynamic> json) : super.fromJson(json) {
     found = json['found'];
@@ -11,6 +12,7 @@ class OrderListResponse extends RestourantResponse {
     coords = json['coords'];
     waitingOrders = listOrderFromJson(json['waiting_orders']);
     finishedOrders = listOrderFromJson(json['finished_orders']);
+    onoff = json['onoff'] ?? "";
   }
 }
 
@@ -40,9 +42,9 @@ class Order {
     time = json['time'];
     ordersum = json['ordersum'];
     payedsum = json['payedsum'];
-    finished_time = json['finished_time']??'';
+    finished_time = json['finished_time'] ?? '';
     address = json['address'];
-    username = json['username']??'';
+    username = json['username'] ?? '';
   }
 }
 
@@ -69,7 +71,7 @@ class Data {
 }
 
 class Food {
-  var  count;
+  var count;
   Data data;
 
   Food.fromJson(Map<String, dynamic> json) {
