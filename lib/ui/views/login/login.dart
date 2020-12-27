@@ -20,7 +20,7 @@ class LoginView extends StatelessWidget {
     // TODO: implement build
     return  Container(
       height: SizeConfig().screenHeight,
-      child: Column(
+      child: SingleChildScrollView(child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -85,7 +85,7 @@ class LoginView extends StatelessWidget {
             ),
           )
         ],
-      ),
+      )),
     );
   }
 }
