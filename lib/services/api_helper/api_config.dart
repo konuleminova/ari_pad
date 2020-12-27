@@ -11,5 +11,16 @@ class ApiConfig {
   String CHANGE_STATUS(String token, String id) =>
       '${BASE_URl}orderlist&token=${token}&change=${id}';
 
+  //on off restourant
   String ON_OFF(String token) => '${BASE_URl}onoff&token=${token}';
+
+  //report
+  String REPORT(String token) => '${BASE_URl}report&token=${token}';
+
+  //stopList
+  String STOP_LIST(String token) => '${BASE_URl}stoplist&token=${token}';
+
+  //stopList on off items
+  String STOP_LIST_ONOFF(String fid, String token) =>
+      '${BASE_URl}stoplistonoff&fid=${fid}&token=${token}';
 }

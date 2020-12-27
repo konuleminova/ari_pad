@@ -12,7 +12,7 @@ ApiResponse<T> useDioRequest<T>(DioConfig<T> config) {
     bool isCancel = false;
     CancelToken cancelToken;
     if (config != null) {
-       print('REQUESTED URL: ${config.path}');
+      print('REQUESTED URL: ${config.path}');
       _state.value = ApiResponse.loading();
       cancelToken = CancelToken();
       dio
@@ -27,13 +27,13 @@ ApiResponse<T> useDioRequest<T>(DioConfig<T> config) {
         if (!isCancel) {
           print('IsCanceled: $isCancel');
           print('VALUE DATA ${value.data}');
-          if (value.data['error'] != '1') {
-            _state.value =
-                ApiResponse.completed(config.transformResponse(value));
-          } else {
-            _state.value =
-                ApiResponse.error(AppException(message: value.data['message']));
-          }
+          _state.value = ApiResponse.completed(config.transformResponse(value));
+//          if (value.data['error'] != '1') {
+//
+//          } else {
+//            _state.value =
+//                ApiResponse.error(AppException(message: value.data['message']));
+//          }
         }
       }).catchError((error) {
         if (!isCancel) {

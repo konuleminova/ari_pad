@@ -1,5 +1,7 @@
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
+import 'package:ari_pad/business_logic/routes/route_names.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
+import 'package:ari_pad/business_logic/view_models/ReportViewModel.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/left_drag_item.dart';
 import 'package:ari_pad/ui/views/orderlist/widgets/right_drag_item.dart';
 import 'package:ari_pad/utils/sharedpref/sp_util.dart';
@@ -229,8 +231,7 @@ class OrderListView extends StatelessWidget {
                                 ),
                               ),
                               onTap: () {
-                                SpUtil.remove('token');
-                                pushReplaceRouteWithName('/');
+                                pushReplaceRouteWithName(ROUTE_REPORT);
                               },
                             ),
                             SizedBox(
