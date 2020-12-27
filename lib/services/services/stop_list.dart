@@ -19,17 +19,16 @@ ApiResponse<List<RestourantItem>> useStopList(UniqueKey uniqueKey) {
         transformResponse: (Response response) {
           return listItemsFromJson(response.data);
         });
-  });
+  },[uniqueKey]);
   ApiResponse<List<RestourantItem>> apiResponse = useDioRequest(dioConfig);
   return apiResponse;
 }
 
 //turn on off stopList items
-ApiResponse<List<RestourantItem>> useStopListOnOff(
-    UniqueKey uniqueKey, String fid) {
+ApiResponse<List<RestourantItem>> useStopListOnOff(String fid,UniqueKey uniqueKey) {
   ApiConfig apiConfig = useApiConfig();
   DioConfig dioConfig = useMemoized(() {
-    if (uniqueKey = null) {
+    if (fid==null||uniqueKey == null) {
       return null;
     }
     return DioConfig<List<RestourantItem>>(
@@ -40,7 +39,7 @@ ApiResponse<List<RestourantItem>> useStopListOnOff(
         transformResponse: (Response response) {
           return listItemsFromJson(response.data);
         });
-  });
+  },[uniqueKey]);
   ApiResponse<List<RestourantItem>> apiResponse = useDioRequest(dioConfig);
   return apiResponse;
 }
