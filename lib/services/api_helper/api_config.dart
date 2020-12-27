@@ -10,4 +10,6 @@ class ApiConfig {
 
   String CHANGE_STATUS(String token, String id) =>
       '${BASE_URl}orderlist&token=${token}&change=${id}';
+
+  String ON_OFF(String token) => '${BASE_URl}onoff&token=${token}';
 }

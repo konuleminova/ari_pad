@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
 import 'package:ari_pad/business_logic/routes/route_navigation.dart';
 import 'package:ari_pad/services/api_helper/api_response.dart';
@@ -38,7 +36,7 @@ class OrderListViewModel extends HookWidget {
         useOrderList(keyRefresh1.value);
 
     useEffect(() {
-      timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      timer = Timer.periodic(Duration(minutes: 44), (timer) {
         keyRefresh1.value = new UniqueKey();
       });
       return () {
@@ -75,12 +73,6 @@ class OrderListViewModel extends HookWidget {
           listScrollController.value.position.maxScrollExtent + 270.toHeight,
           curve: Curves.easeOut,
           duration: Duration(milliseconds: 500));
-//      if (apiResponse.status == Status.Done) {
-//        acceptTarget.value[apiResponse.data.waitingOrders[index].id] =
-//            !acceptTarget.value[apiResponse.data.waitingOrders[index].id];
-//
-//        acceptTarget.notifyListeners();
-//      }
       return () {};
     }, [id.value]);
 
