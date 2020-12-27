@@ -211,8 +211,7 @@ class OrderListView extends StatelessWidget {
                                 ),
                               ),
                               onTap: () {
-                                SpUtil.remove('token');
-                                pushReplaceRouteWithName('/');
+                                pushReplaceRouteWithName(ROUTE_STOPLIST);
                               },
                             ),
                             SizedBox(
