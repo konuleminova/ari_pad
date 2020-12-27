@@ -39,8 +39,6 @@ class OrderListViewModel extends HookWidget {
     //Use fetch Order list
     ApiResponse<OrderListResponse> apiResponse = useOrderList(refreshKey.value);
 
-
-
     useEffect(() {
       timer = Timer.periodic(Duration(minutes: 44), (timer) {
         refreshKey.value = new UniqueKey();
@@ -92,7 +90,9 @@ class OrderListViewModel extends HookWidget {
 
     final onOFFRestourantCallBack = useCallback(() {
       onOffKey.value = new UniqueKey();
-      refreshKey.value = new UniqueKey();
+      Future.delayed(Duration(milliseconds: 400)).then((value) {
+        refreshKey.value = new UniqueKey();
+      });
     }, [onOffKey.value]);
 
     // TODO: implement build
