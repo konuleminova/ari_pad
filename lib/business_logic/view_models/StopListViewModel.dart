@@ -11,10 +11,11 @@ class StopListViewModel extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final uniqueKey = useState<UniqueKey>(UniqueKey());
+    final uniqueKeyFID = useState<UniqueKey>(UniqueKey());
     final fid = useState<String>();
 
     //stopListOnOff callback
-    useStopListOnOff(fid.value, uniqueKey.value);
+    useStopListOnOff(fid.value,uniqueKeyFID.value);
 
     //fetch stoplist
     ApiResponse<List<RestourantItem>> apiResponse =
@@ -24,6 +25,7 @@ class StopListViewModel extends HookWidget {
     final stopListOnOffCallBack = useCallback((String id, int index) {
       print('HERE cllaback ${id}');
       fid.value = id;
+      uniqueKeyFID.value=new UniqueKey();
 //      if (apiResponse.data[index].item_3 == '1') {
 //        apiResponse.data[index].item_3 = '0';
 //      } else {
