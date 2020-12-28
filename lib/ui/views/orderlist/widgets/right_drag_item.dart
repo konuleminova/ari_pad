@@ -158,7 +158,7 @@ class RightDragItem extends HookWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 4,
+                              flex: 7,
                               child: ListView.builder(
                                   padding: EdgeInsets.all(0),
                                   shrinkWrap: true,
@@ -194,10 +194,10 @@ class RightDragItem extends HookWidget {
                               width: 4.toWidth,
                             ),
                             Expanded(
+                              flex: 2,
                                 child: InkWell(
                               child: Container(
-                                width: 100.toWidth,
-                                height: 44.toHeight,
+                                height: 42.toHeight,
                                 // padding: EdgeInsets.all(3),
                                 color: Colors.white,
                                 child: Row(
@@ -205,6 +205,7 @@ class RightDragItem extends HookWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
+                                    SizedBox(width: 8,),
                                     Icon(
                                       Icons.clear,
                                       color: Colors.red,
