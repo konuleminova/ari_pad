@@ -282,7 +282,7 @@ class OrderListView extends StatelessWidget {
                                     },
                                   )),
                                   SizedBox(
-                                    width: 16,
+                                    width: 8,
                                   ),
                                 ],
                               )),
