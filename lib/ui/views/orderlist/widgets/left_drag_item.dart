@@ -87,7 +87,7 @@ class LeftDragItem extends StatelessWidget {
             right: 0,
             top: 0,
             child: CircleAvatar(
-              radius: 14.toFont,
+              radius: 10.toFont,
               child: Icon(
                 Icons.done,
                 color: Colors.black,
@@ -98,4 +98,3 @@ class LeftDragItem extends StatelessWidget {
     );
   }
 }
-//     "3TOMAT ŞORBASI \n1POLLO CON GORGONZOLA \n \n5 BRUSCHETTA",

@@ -293,7 +293,7 @@ class RightDragItem extends HookWidget {
             right: 0,
             top: 0,
             child: CircleAvatar(
-              radius: 14.toFont,
+              radius: 10.toFont,
               child: Icon(
                 Icons.more_horiz,
                 color: Colors.black,
