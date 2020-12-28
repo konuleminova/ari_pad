@@ -48,7 +48,7 @@ class OrderListView extends StatelessWidget {
                       width: SizeConfig().screenWidth,
                       margin: EdgeInsets.only(left: 20, top: 20, bottom: 20),
                       padding: EdgeInsets.all(20),
-                      color: Color(0xFF3F3F3F),
+                      color: Color(0xFF616161),
                       child: ListView.builder(
                           shrinkWrap: true,
                           itemCount: orderListResponse.waitingOrders.length,
@@ -136,7 +136,7 @@ class OrderListView extends StatelessWidget {
                             return true;
                           },
                         ),
-                        color: Color(0xFF3F3F3F)),
+                        color: Color(0xFF616161)),
                   ),
                 ],
               ),
@@ -150,10 +150,10 @@ class OrderListView extends StatelessWidget {
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(
-                      horizontal: 44,
+                      horizontal: 20,
                     ),
                     padding: EdgeInsets.only(
-                        top: 4.toHeight, left: 8.toWidth, right: 0.toWidth),
+                        top: 24, left: 34, right: 16),
                     height: 100,
                     width: SizeConfig().screenWidth,
                     alignment: Alignment.topCenter,
@@ -171,17 +171,17 @@ class OrderListView extends StatelessWidget {
                             flex: 3,
                             child: InkWell(
                               child: Container(
+                                margin: EdgeInsets.only(top: 12),
                                   child: Text(
                                     SpUtil.getString('name surname') ??
                                         "Name Surname",
                                     style:
-                                        TextStyle(fontWeight: FontWeight.w500),
+                                    TextStyle(fontWeight: FontWeight.w500),
                                   ),
                                   // width: 44.toWidth,
-                                  height: 50.toHeight,
-                                  alignment: Alignment.centerLeft),
+                                  alignment: Alignment.topLeft),
                               onTap: () {
-                                 onRefreshDataCallBack();
+                                onRefreshDataCallBack();
                               },
                             )),
                         Expanded(
@@ -196,10 +196,10 @@ class OrderListView extends StatelessWidget {
                                         width: 44.toWidth,
                                         height: 40.toHeight,
                                         alignment: Alignment.center,
-                                        color: orderListResponse.onoff == '0'
+                                        color: orderListResponse.onoff== '0'
                                             ? ThemeColor()
-                                                .greyColor
-                                                .withOpacity(0.6)
+                                            .greyColor
+                                            .withOpacity(0.6)
                                             : Colors.black,
                                         child: Text(
                                           'ON',
@@ -208,7 +208,7 @@ class OrderListView extends StatelessWidget {
                                         ),
                                       ),
                                       onTap: () {
-                                        onOFFRestourantCallBack.call();
+                                         onOFFRestourantCallBack.call();
                                       },
                                     ),
                                   ),
@@ -263,24 +263,24 @@ class OrderListView extends StatelessWidget {
                                   ),
                                   Expanded(
                                       child: InkWell(
-                                    child: Container(
-                                      width: 44.toWidth,
-                                      height: 40.toHeight,
-                                      alignment: Alignment.center,
-                                      color: ThemeColor()
-                                          .greyColor
-                                          .withOpacity(0.6),
-                                      child: Text(
-                                        'Çıxış',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      SpUtil.remove('token');
-                                      pushReplaceRouteWithName('/');
-                                    },
-                                  )),
+                                        child: Container(
+                                          width: 44.toWidth,
+                                          height: 40.toHeight,
+                                          alignment: Alignment.center,
+                                          color: ThemeColor()
+                                              .greyColor
+                                              .withOpacity(0.6),
+                                          child: Text(
+                                            'Çıxış',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          SpUtil.remove('token');
+                                          pushReplaceRouteWithName('/');
+                                        },
+                                      )),
                                   SizedBox(
                                     width: 8,
                                   ),
