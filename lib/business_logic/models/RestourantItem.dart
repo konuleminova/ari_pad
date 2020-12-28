@@ -3,6 +3,7 @@ class RestourantItem {
   String item_1;
   String item_2;
   String item_3;
+  bool isLoading=false;
 
   RestourantItem.fromJson(Map<String, dynamic> json) {
     id = json['id']??'';

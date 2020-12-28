@@ -13,34 +13,45 @@ class StopListViewModel extends HookWidget {
     final uniqueKey = useState<UniqueKey>(UniqueKey());
     final uniqueKeyFID = useState<UniqueKey>(UniqueKey());
     final fid = useState<String>();
+    final apiResponseValue =
+        useState<ApiResponse<List<RestourantItem>>>(ApiResponse.loading());
 
     //stopListOnOff callback
-    useStopListOnOff(fid.value,uniqueKeyFID.value);
+    useStopListOnOff(fid.value, uniqueKeyFID.value);
 
     //fetch stoplist
     ApiResponse<List<RestourantItem>> apiResponse =
         useStopList(uniqueKey.value);
 
+    useEffect(() {
+      if (apiResponse.status == Status.Done) {
+        apiResponseValue.value = apiResponse;
+      }
+      return () {};
+    }, [apiResponse.status]);
     //useStopListonOff callBack
     final stopListOnOffCallBack = useCallback((String id, int index) {
       print('HERE cllaback ${id}');
+      apiResponseValue.value.data[index].isLoading = true;
       fid.value = id;
-      uniqueKeyFID.value=new UniqueKey();
-//      if (apiResponse.data[index].item_3 == '1') {
-//        apiResponse.data[index].item_3 = '0';
-//      } else {
-//        apiResponse.data[index].item_3 = '1';
-//      }
+      uniqueKeyFID.value = new UniqueKey();
+      if (apiResponseValue.value.data[index].item_3 == '1') {
+        apiResponseValue.value.data[index].item_3 = '0';
+      } else if (apiResponseValue.value.data[index].item_3 == '0') {
+        apiResponseValue.value.data[index].item_3 = '1';
+      }
 
-     Future.delayed(Duration(milliseconds: 400)).then((value){
-       uniqueKey.value = new UniqueKey();
-     });
+      Future.delayed(Duration(milliseconds: 200)).then((value) {
+        if (apiResponseValue.value.status == Status.Done) {
+          apiResponseValue.value.data[index].isLoading = false;
+        }
+      });
     }, [fid.value]);
     // TODO: implement build
     return CustomErrorHandler(
-      statuses: [apiResponse.status],
-      errors: [apiResponse.error],
-      child: StopListView(apiResponse.data, stopListOnOffCallBack),
+      statuses: [apiResponseValue.value.status],
+      errors: [apiResponseValue.value.error],
+      child: StopListView(apiResponseValue?.value?.data, stopListOnOffCallBack),
     );
   }
 }

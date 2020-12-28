@@ -146,14 +146,12 @@ class OrderListView extends StatelessWidget {
               left: 0,
               right: 0,
               child: InkWell(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Container(
                     margin: EdgeInsets.symmetric(
                       horizontal: 20,
                     ),
-                    padding: EdgeInsets.only(
-                        top: 24, left: 34, right: 16),
+                    padding: EdgeInsets.only(top: 24, left: 34, right: 16),
                     height: 100,
                     width: SizeConfig().screenWidth,
                     alignment: Alignment.topCenter,
@@ -171,12 +169,12 @@ class OrderListView extends StatelessWidget {
                             flex: 3,
                             child: InkWell(
                               child: Container(
-                                margin: EdgeInsets.only(top: 12),
+                                  margin: EdgeInsets.only(top: 12),
                                   child: Text(
                                     SpUtil.getString('name surname') ??
                                         "Name Surname",
                                     style:
-                                    TextStyle(fontWeight: FontWeight.w500),
+                                        TextStyle(fontWeight: FontWeight.w500),
                                   ),
                                   // width: 44.toWidth,
                                   alignment: Alignment.topLeft),
@@ -196,19 +194,21 @@ class OrderListView extends StatelessWidget {
                                         width: 44.toWidth,
                                         height: 40.toHeight,
                                         alignment: Alignment.center,
-                                        color: orderListResponse.onoff== '0'
+                                        color: orderListResponse.onoff == '0'
                                             ? ThemeColor()
-                                            .greyColor
-                                            .withOpacity(0.6)
+                                                .greyColor
+                                                .withOpacity(0.6)
                                             : Colors.black,
                                         child: Text(
-                                          'ON',
+                                          orderListResponse.onoff == '0'
+                                              ? 'OFF'
+                                              : 'ON',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),
                                       onTap: () {
-                                         onOFFRestourantCallBack.call();
+                                        onOFFRestourantCallBack.call();
                                       },
                                     ),
                                   ),
@@ -263,24 +263,24 @@ class OrderListView extends StatelessWidget {
                                   ),
                                   Expanded(
                                       child: InkWell(
-                                        child: Container(
-                                          width: 44.toWidth,
-                                          height: 40.toHeight,
-                                          alignment: Alignment.center,
-                                          color: ThemeColor()
-                                              .greyColor
-                                              .withOpacity(0.6),
-                                          child: Text(
-                                            'Çıxış',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          SpUtil.remove('token');
-                                          pushReplaceRouteWithName('/');
-                                        },
-                                      )),
+                                    child: Container(
+                                      width: 44.toWidth,
+                                      height: 40.toHeight,
+                                      alignment: Alignment.center,
+                                      color: ThemeColor()
+                                          .greyColor
+                                          .withOpacity(0.6),
+                                      child: Text(
+                                        'Çıxış',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      SpUtil.remove('token');
+                                      pushReplaceRouteWithName('/');
+                                    },
+                                  )),
                                   SizedBox(
                                     width: 8,
                                   ),
