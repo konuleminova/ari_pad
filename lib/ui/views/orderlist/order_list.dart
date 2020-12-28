@@ -147,7 +147,7 @@ class OrderListView extends StatelessWidget {
               right: 0,
               child: InkWell(
                   onTap: () {
-                   // onRefreshDataCallBack();
+                    // onRefreshDataCallBack();
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(
@@ -168,95 +168,116 @@ class OrderListView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Container(
-                          child: Text(
-                            SpUtil.getString('name surname') ?? "Name Surname",
-                            style: TextStyle(fontWeight: FontWeight.w500),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                              child: Text(
+                                SpUtil.getString('name surname') ??
+                                    "Name Surname",
+                                style: TextStyle(fontWeight: FontWeight.w500),
+                              ),
+                              // width: 44.toWidth,
+                              height: 50.toHeight,
+                              alignment: Alignment.centerLeft),
+                        ),
+                        Expanded(
+                          flex: 2,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: InkWell(
+                                  child: Container(
+                                    width: 44.toWidth,
+                                    height: 40.toHeight,
+                                    alignment: Alignment.center,
+                                    color: orderListResponse.onoff == '0'
+                                        ? ThemeColor()
+                                            .greyColor
+                                            .withOpacity(0.6)
+                                        : Colors.black,
+                                    child: Text(
+                                      'ON',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    onOFFRestourantCallBack.call();
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Expanded(
+                                child: InkWell(
+                                  child: Container(
+                                    width: 44.toWidth,
+                                    height: 40.toHeight,
+                                    alignment: Alignment.center,
+                                    color:
+                                        ThemeColor().greyColor.withOpacity(0.6),
+                                    child: Text(
+                                      'Stoplist ',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    pushRouteWithName(ROUTE_STOPLIST);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Expanded(
+                                child: InkWell(
+                                  child: Container(
+                                    width: 44.toWidth,
+                                    height: 40.toHeight,
+                                    alignment: Alignment.center,
+                                    color:
+                                        ThemeColor().greyColor.withOpacity(0.6),
+                                    child: Text(
+                                      'Çıxarış',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    pushRouteWithName(ROUTE_REPORT);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Expanded(
+                                  child: InkWell(
+                                child: Container(
+                                  width: 44.toWidth,
+                                  height: 40.toHeight,
+                                  alignment: Alignment.center,
+                                  color:
+                                      ThemeColor().greyColor.withOpacity(0.6),
+                                  child: Text(
+                                    'Çıxış',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                onTap: () {
+                                  SpUtil.remove('token');
+                                  pushReplaceRouteWithName('/');
+                                },
+                              )),
+                              SizedBox(
+                                width: 16,
+                              ),
+                            ],
                           ),
-                          // width: 44.toWidth,
-                          height: 50.toHeight,
-                          alignment: Alignment.center,
-                        ),
-                        Row(
-                          children: [
-                            InkWell(
-                              child: Container(
-                                width: 44.toWidth,
-                                height: 40.toHeight,
-                                alignment: Alignment.center,
-                                color: orderListResponse.onoff == '0'
-                                    ? ThemeColor().greyColor.withOpacity(0.6)
-                                    : Colors.black,
-                                child: Text(
-                                  'ON',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              onTap: () {
-                                onOFFRestourantCallBack.call();
-                              },
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            InkWell(
-                              child: Container(
-                                width: 44.toWidth,
-                                height: 40.toHeight,
-                                alignment: Alignment.center,
-                                color: ThemeColor().greyColor.withOpacity(0.6),
-                                child: Text(
-                                  'Stoplist ',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              onTap: () {
-                                pushRouteWithName(ROUTE_STOPLIST);
-                              },
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            InkWell(
-                              child: Container(
-                                width: 44.toWidth,
-                                height: 40.toHeight,
-                                alignment: Alignment.center,
-                                color: ThemeColor().greyColor.withOpacity(0.6),
-                                child: Text(
-                                  'Çıxarış',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              onTap: () {
-                                pushRouteWithName(ROUTE_REPORT);
-                              },
-                            ),
-                            SizedBox(
-                              width: 4,
-                            ),
-                            InkWell(
-                              child: Container(
-                                width: 44.toWidth,
-                                height: 40.toHeight,
-                                alignment: Alignment.center,
-                                color: ThemeColor().greyColor.withOpacity(0.6),
-                                child: Text(
-                                  'Çıxış',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                              onTap: () {
-                                SpUtil.remove('token');
-                                pushReplaceRouteWithName('/');
-                              },
-                            )
-                          ],
-                        ),
+                        )
                       ],
                     ),
                   )),
