@@ -12,7 +12,7 @@ class ReportView extends StatelessWidget {
     // TODO: implement build
     return Container(
         color: Colors.white,
-        margin: EdgeInsets.all(16),
+        margin: EdgeInsets.only(left: 16,right: 16,top: 34,bottom: 16),
         padding: EdgeInsets.all(16),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
