@@ -169,6 +169,8 @@ class OrderListView extends StatelessWidget {
                             flex: 3,
                             child: InkWell(
                               child: Container(
+                                height: 54,
+                                  width: 100,
                                   margin: EdgeInsets.only(top: 8),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
