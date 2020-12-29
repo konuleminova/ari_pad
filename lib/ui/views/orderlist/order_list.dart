@@ -169,12 +169,32 @@ class OrderListView extends StatelessWidget {
                             flex: 3,
                             child: InkWell(
                               child: Container(
-                                  margin: EdgeInsets.only(top: 12),
-                                  child: Text(
-                                    SpUtil.getString('name surname') ??
-                                        "Name Surname",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w500),
+                                  margin: EdgeInsets.only(top: 8),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        SpUtil.getString('name surname') ??
+                                            "Name Surname",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                      SizedBox(
+                                        width: 40,
+                                      ),
+                                      Expanded(
+                                          child: InkWell(
+                                        child: Container(
+                                          child: Icon(
+                                            Icons.play_circle_filled,
+                                            size: 28,
+                                          ),
+                                        ),
+                                        onTap: () {
+
+                                        },
+                                      ))
+                                    ],
                                   ),
                                   // width: 44.toWidth,
                                   alignment: Alignment.topLeft),
@@ -200,7 +220,7 @@ class OrderListView extends StatelessWidget {
                                                 .withOpacity(0.6)
                                             : Colors.black,
                                         child: Text(
-                                          orderListResponse.onoff == '0'
+                                          orderListResponse.onoff == '1'
                                               ? 'OFF'
                                               : 'ON',
                                           textAlign: TextAlign.center,

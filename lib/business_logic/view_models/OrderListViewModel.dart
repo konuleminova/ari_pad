@@ -40,7 +40,7 @@ class OrderListViewModel extends HookWidget {
     ApiResponse<OrderListResponse> apiResponse = useOrderList(refreshKey.value);
 
     useEffect(() {
-      timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      timer = Timer.periodic(Duration(minutes: 44), (timer) {
         refreshKey.value = new UniqueKey();
       });
       return () {
