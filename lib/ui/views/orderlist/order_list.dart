@@ -191,7 +191,7 @@ class OrderListView extends StatelessWidget {
                                           ),
                                         ),
                                         onTap: () {
-
+                                          pushRouteWithName(ROUTE_VIDEO_PLAYER);
                                         },
                                       ))
                                     ],
