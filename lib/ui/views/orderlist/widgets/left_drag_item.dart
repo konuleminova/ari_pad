@@ -1,5 +1,4 @@
 import 'package:ari_pad/business_logic/models/OrderListResponse.dart';
-import 'package:ari_pad/utils/theme_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ari_pad/utils/size_config.dart';
@@ -18,7 +17,7 @@ class LeftDragItem extends StatelessWidget {
             margin: EdgeInsets.only(
                 bottom: 8.toHeight, top: 16.toHeight, right: 4.toWidth),
             width: MediaQuery.of(context).size.width,
-            color: Color(0xFF72D84B),
+            color: Color(0xFF72D84B).withOpacity(double.parse(order.opacity)),
             // height: 140.toHeight,
             padding: EdgeInsets.all(16),
             child: Column(
@@ -29,6 +28,7 @@ class LeftDragItem extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,7 +36,9 @@ class LeftDragItem extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               '${index + 1}. ${order.data[index].data.name}',
-                              style: TextStyle(fontSize: 12.toFont,fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontSize: 12.toFont,
+                                  fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
                               width: 16.toHeight,
@@ -58,9 +60,25 @@ class LeftDragItem extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           width: SizeConfig().screenWidth / 3,
-                        ) ,SizedBox(
+                        ),
+                        SizedBox(
                           height: 4.toHeight,
                         ),
+                        Container(
+                          child: Row(
+                            children: [
+                              Icon(Icons.person),
+                              SizedBox(width: 8,),
+                              Text(order.username,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12.toFont)),
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.end,
+                          ),
+                          width: SizeConfig().screenWidth,
+                          alignment: Alignment.centerRight,
+                        )
                       ],
                     );
                   },

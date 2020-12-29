@@ -30,6 +30,7 @@ class Order {
   String finished_time;
   String address;
   String username;
+  String opacity;
 
   Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -45,6 +46,7 @@ class Order {
     finished_time = json['finished_time'] ?? '';
     address = json['address'];
     username = json['username'] ?? '';
+    opacity = json['opacity'] ?? "1";
   }
 }
 
