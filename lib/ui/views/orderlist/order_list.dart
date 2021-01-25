@@ -169,11 +169,12 @@ class OrderListView extends StatelessWidget {
                             flex: 3,
                             child: InkWell(
                               child: Container(
-                                height: 54,
+                                  height: 54,
                                   width: 100,
                                   margin: EdgeInsets.only(top: 8),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         SpUtil.getString('name surname') ??
@@ -181,11 +182,7 @@ class OrderListView extends StatelessWidget {
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      SizedBox(
-                                        width: 40,
-                                      ),
-                                      Expanded(
-                                          child: InkWell(
+                                      InkWell(
                                         child: Container(
                                           child: Icon(
                                             Icons.play_circle_filled,
@@ -195,7 +192,10 @@ class OrderListView extends StatelessWidget {
                                         onTap: () {
                                           pushRouteWithName(ROUTE_VIDEO_PLAYER);
                                         },
-                                      ))
+                                      ),
+                                      SizedBox(
+                                        width: 30.toWidth,
+                                      ),
                                     ],
                                   ),
                                   // width: 44.toWidth,
