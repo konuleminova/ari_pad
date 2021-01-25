@@ -35,7 +35,7 @@ class LeftDragItem extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
                             Text(
-                              '${index + 1}. ${order.data[index].data.name}',
+                              '${order.data[index].count}. ${order.data[index].data.name}',
                               style: TextStyle(
                                   fontSize: 12.toFont,
                                   fontWeight: FontWeight.w600),
