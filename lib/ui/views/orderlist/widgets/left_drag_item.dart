@@ -23,21 +23,37 @@ class LeftDragItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Row(
-                    children: [
-                      Icon(Icons.person),
-                      SizedBox(
-                        width: 8,
+                Row(
+                  children: [
+                    Container(
+                      child: Text(
+                        '#${order.id} ${order.payedsum??""}',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.toFont,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
-                      Text(order.username,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: 12.toFont)),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.end,
-                  ),
-                  width: SizeConfig().screenWidth,
-                  alignment: Alignment.centerRight,
+                    ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Icon(Icons.person),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(order.username,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.black, fontSize: 12.toFont,)),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.end,
+                      ),
+                    )
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
                 ),
                 ListView.builder(
                   shrinkWrap: true,
@@ -61,7 +77,7 @@ class LeftDragItem extends StatelessWidget {
                                 children: [
                                   Text(
                                     '${order.data[index].count}x ${order.data[index].data.name}',
-                                    overflow: TextOverflow.ellipsis,
+                                    // overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 11.toFont,
                                       fontWeight: FontWeight.w600,
@@ -94,7 +110,7 @@ class LeftDragItem extends StatelessWidget {
                 ),
                 Container(
                   child: Text(
-                    order.id,
+                    order.dt ?? "",
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
