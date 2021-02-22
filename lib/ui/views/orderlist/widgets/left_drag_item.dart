@@ -23,64 +23,69 @@ class LeftDragItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.person),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(order.username,
+                          style: TextStyle(
+                              color: Colors.black, fontSize: 12.toFont)),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.end,
+                  ),
+                  width: SizeConfig().screenWidth,
+                  alignment: Alignment.centerRight,
+                ),
                 ListView.builder(
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Text(
-                              '${order.data[index].count}. ${order.data[index].data.name}',
-                              style: TextStyle(
-                                  fontSize: 12.toFont,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            SizedBox(
-                              width: 16.toHeight,
-                            ),
-                            Expanded(
-                              child: Text(order.data[index].data.price + " ₼",
-                                  style: TextStyle(fontSize: 12.toFont)),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 4.toHeight,
-                        ),
-                        Container(
-                          child: Text(
-                            order.data[index].data.information,
-                            style: TextStyle(fontSize: 10.toFont),
-                            textAlign: TextAlign.start,
-                            overflow: TextOverflow.ellipsis,
+                    return Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(order.data[index].data.price + " ₼",
+                                style: TextStyle(
+                                    fontSize: 12.toFont, color: Colors.green)),
                           ),
-                          width: SizeConfig().screenWidth / 3,
-                        ),
-                        SizedBox(
-                          height: 4.toHeight,
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Icon(Icons.person),
-                              SizedBox(width: 8,),
-                              Text(order.username,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12.toFont)),
-                            ],
-                            mainAxisAlignment: MainAxisAlignment.end,
+                          SizedBox(
+                            width: 8.toHeight,
                           ),
-                          width: SizeConfig().screenWidth,
-                          alignment: Alignment.centerRight,
-                        )
-                      ],
-                    );
+                          Expanded(
+                              flex: 4,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    '${order.data[index].count}x ${order.data[index].data.name}',
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: 11.toFont,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 22),
+                                    child: Text(
+                                      order.data[index].data.information,
+                                      style: TextStyle(
+                                          fontSize: 10.toFont,
+                                          color: Colors.green),
+                                      textAlign: TextAlign.start,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  )
+                                ],
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                              )),
+                          SizedBox(
+                            width: 4.toHeight,
+                          ),
+                        ]);
                   },
                   itemCount: order.data.length,
                 ),
