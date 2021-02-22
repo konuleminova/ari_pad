@@ -56,16 +56,31 @@ class RightDragItem extends HookWidget {
                 Row(
                   children: [
                     Container(
-                      child: Text(
-                        '#${order.id}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14.toFont,
+                        child: Row(
+                      children: [
+                        Text(
+                          '#${order.id}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14.toFont,
+                          ),
+                          textAlign: TextAlign.start,
                         ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
+                        SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          '${order.ordersum ?? ''}',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14.toFont,
+                          ),
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    )),
                     Container(
                       child: Column(
                         children: [

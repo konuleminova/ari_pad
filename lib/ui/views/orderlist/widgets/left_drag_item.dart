@@ -36,6 +36,15 @@ class LeftDragItem extends StatelessWidget {
                         textAlign: TextAlign.start,
                       ),
                     ),
+                    Text(
+                      '${order.payedsum??''}',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14.toFont,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
                     Expanded(
                       child: Row(
                         children: [
