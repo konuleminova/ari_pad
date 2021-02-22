@@ -54,57 +54,16 @@ class RightDragItem extends HookWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: <Widget>[
-                                        Text(
-                                          '${order.data[index].count}. ${order.data[index].data.name}',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12.toFont),
-                                        ),
-//                                  )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 4.toHeight,
-                                    ),
-                                    Container(
-                                      child: Text(
-                                        order.data[index].data.information,
-                                        style: TextStyle(
-                                            color:
-                                                Colors.white.withOpacity(0.7),
-                                            fontSize: 10.toFont),
-                                        textAlign: TextAlign.start,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      width: SizeConfig().screenWidth / 3,
-                                      alignment: Alignment.topLeft,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          );
-                        },
-                        itemCount: order.data.length,
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                    Container(
+                      child: Text(
+                        '#${order.id}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.toFont,
+                        ),
+                        textAlign: TextAlign.start,
                       ),
                     ),
                     Container(
@@ -131,21 +90,74 @@ class RightDragItem extends HookWidget {
                       ),
                     ),
                   ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                          return Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(
+                                      order.data[index].data.price + " ₼",
+                                      style: TextStyle(
+                                          fontSize: 12.toFont,
+                                          color: Colors.green)),
+                                ),
+                                SizedBox(
+                                  width: 8.toHeight,
+                                ),
+                                Expanded(
+                                    flex: 4,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          '${order.data[index].count}x ${order.data[index].data.name}',
+                                          // overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 11.toFont,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 22),
+                                          child: Text(
+                                            order.data[index].data.information,
+                                            style: TextStyle(
+                                                fontSize: 10.toFont,
+                                                color: Colors.white),
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                    )),
+                                SizedBox(
+                                  width: 4.toHeight,
+                                ),
+                              ]);
+                        },
+                        itemCount: order.data.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 2.toHeight,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      order.id ?? '',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15.toFont,
-                          fontWeight: FontWeight.w600),
-                    )
-                  ],
                 ),
                 SizedBox(
                   height: 16.toHeight,
@@ -194,41 +206,44 @@ class RightDragItem extends HookWidget {
                               width: 4.toWidth,
                             ),
                             Expanded(
-                              flex: 2,
+                                flex: 2,
                                 child: InkWell(
-                              child: Container(
-                                height: 42.toHeight,
-                                // padding: EdgeInsets.all(3),
-                                color: Colors.white,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(width: 8,),
-                                    Icon(
-                                      Icons.clear,
-                                      color: Colors.red,
+                                  child: Container(
+                                    height: 42.toHeight,
+                                    // padding: EdgeInsets.all(3),
+                                    color: Colors.white,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Icon(
+                                          Icons.clear,
+                                          color: Colors.red,
+                                        ),
+                                        SizedBox(
+                                          width: 4.toWidth,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'Imtina',
+                                            style: TextStyle(color: Colors.red),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 4.toWidth,
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 4.toWidth,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'Imtina',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 4.toWidth,
-                                    )
-                                  ],
-                                ),
-                              ),
-                              onTap: () {
-                                isExpaned.value = true;
-                              },
-                            ))
+                                  ),
+                                  onTap: () {
+                                    isExpaned.value = true;
+                                  },
+                                ))
                           ],
                         ))
                     : Container(
