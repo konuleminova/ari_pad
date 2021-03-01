@@ -27,7 +27,7 @@ class LeftDragItem extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        '#${order.id} ${order.payedsum??""}',
+                        '#${order.id} ${order.ordersum??""}',
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
@@ -36,15 +36,15 @@ class LeftDragItem extends StatelessWidget {
                         textAlign: TextAlign.start,
                       ),
                     ),
-                    Text(
-                      '${order.payedsum??''}',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14.toFont,
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
+//                    Text(
+//                      '${order.payedsum??''}',
+//                      style: TextStyle(
+//                        color: Colors.black,
+//                        fontWeight: FontWeight.w600,
+//                        fontSize: 14.toFont,
+//                      ),
+//                      textAlign: TextAlign.start,
+//                    ),
                     Expanded(
                       child: Row(
                         children: [
