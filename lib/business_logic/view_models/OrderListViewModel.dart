@@ -10,6 +10,7 @@ import 'package:ari_pad/ui/views/orderlist/order_list.dart';
 import 'package:ari_pad/utils/sharedpref/sp_util.dart';
 import 'package:ari_pad/utils/theme_color.dart';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -40,7 +41,7 @@ class OrderListViewModel extends HookWidget {
     ApiResponse<OrderListResponse> apiResponse = useOrderList(refreshKey.value);
 
     useEffect(() {
-      timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      timer = Timer.periodic(Duration(seconds: 4), (timer) {
         refreshKey.value = new UniqueKey();
       });
       return () {
@@ -61,11 +62,19 @@ class OrderListViewModel extends HookWidget {
       if (apiResponse.status == Status.Done) {
         for (int i = 0; i < apiResponse.data.waitingOrders.length; i++) {
           if (apiResponse.data.waitingOrders[i].approved == '0') {
-            AudioCache().play("songs/buzz.mp3");
+            //AudioCache().play("songs/buzz.mp3");
+            AudioCache cache = new AudioCache();
+            cache.loop('songs/buzz.mp3').then((player) {
+              player.pause();
+              player.stop();
+              player.resume();
+            });
           }
           break;
         }
       }
+
+      //  AudioCache().play("songs/buzz.mp3");
     }, [apiResponse]);
 
     //On drag Started Callback
