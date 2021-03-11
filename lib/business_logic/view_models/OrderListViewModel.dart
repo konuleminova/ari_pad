@@ -19,6 +19,7 @@ import 'package:ari_pad/utils/size_config.dart';
 
 class OrderListViewModel extends HookWidget {
   Timer timer;
+  final playerx = new AudioCache(fixedPlayer: AudioPlayer());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class OrderListViewModel extends HookWidget {
     ApiResponse<OrderListResponse> apiResponse = useOrderList(refreshKey.value);
 
     useEffect(() {
-      timer = Timer.periodic(Duration(seconds: 4), (timer) {
+      timer = Timer.periodic(Duration(minutes: 1), (timer) {
         refreshKey.value = new UniqueKey();
       });
       return () {
@@ -62,19 +63,12 @@ class OrderListViewModel extends HookWidget {
       if (apiResponse.status == Status.Done) {
         for (int i = 0; i < apiResponse.data.waitingOrders.length; i++) {
           if (apiResponse.data.waitingOrders[i].approved == '0') {
-            //AudioCache().play("songs/buzz.mp3");
-            AudioCache cache = new AudioCache();
-            cache.loop('songs/buzz.mp3').then((player) {
-              player.pause();
-              player.stop();
-              player.resume();
-            });
+            playerx.fixedPlayer.stop();
+            playerx.play('songs/buzz.mp3');
           }
           break;
         }
       }
-
-      //  AudioCache().play("songs/buzz.mp3");
     }, [apiResponse]);
 
     //On drag Started Callback
